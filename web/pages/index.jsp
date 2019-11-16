@@ -12,6 +12,14 @@ function IniciaEvaluacion(accion) {
         document.formularioPrincipal.action = accion;
         document.formularioPrincipal.submit();
     }
+    
+function ConsultaNomEvento(accion) {
+
+        document.formularioPrincipal.action = accion;
+        document.formularioPrincipal.submit();
+    }    
+    
+    
 
     function cerrar(accion) {
 
@@ -251,7 +259,7 @@ function IniciaEvaluacion(accion) {
                                                                             <div class="card-body">
                                                                                 <div class="form-group">
                                                                                     <div class="col-12">
-                                                                                        <s:textfield cssClass="form-control" name="FOLIO" id="FOLIO" placeholder="Ingrese su número de folio"></s:textfield> 
+                                                                                        <s:textfield cssClass="form-control" name="res.FOLIO" id="res.FOLIO" placeholder="Ingrese su número de folio"></s:textfield> 
                                                                                     </div>
                                                                                     <br></br>
                                                                                     <div class="col-12 text-center">
@@ -264,14 +272,48 @@ function IniciaEvaluacion(accion) {
                                                                         </div>
                                                                         <!--  end card  -->
                                                                         <s:if test="banMuestraForm">
+                                                                            <s:hidden name="banMuestraForm" id="%{banMuestraForm}"></s:hidden>
                                                                         <div class="card">
                                                                             <div class="card-header text-center  font-weight-bold">
                                                                                 <h3>Encuesta de Satisfacción</h3>
-                                                                                <p class="text-left">Se evaluara la unidad económica con <strong>RFC:</strong><span class="text-primary font-weight-bold"><s:property value="ue.RFC" ></s:property></span> <br></br> <strong>Razon social:</strong><span class="text-primary font-weight-bold"> <s:property value="ue.RAZON_SOCIAL"></s:property></span> <br></br> <strong>Sucursal:</strong> <span class="text-primary font-weight-bold"><s:if test="ue.NOMBRE_SUC.lenght()>0"><s:property value="ue.NOMBRE_SUC"></s:property></s:if><s:else>SIN SUCURSAL</s:else></span> </p> 
-                                                                                 <s:hidden name="ue.RFC" id="%{ue.RFC}"></s:hidden>
-                                                                                 <s:hidden name="ue.RAZON_SOCIAL" id="%{ue.RAZON_SOCIAL}"></s:hidden>
-                                                                                 <s:hidden name="ue.NOMBRE_SUC" id="%{ue.NOMBRE_SUC}"></s:hidden>
-                                                                                
+                                                                                 <div class="col-lg-6">
+                                                                                       <label for="SECTOR">SELECCIONE EL EVENTO QUE TOMO:</label>
+                                                                                       <s:select  data-style="select-with-transition"   name="res.ID_EVENTO" id="res.ID_EVENTO" list="ListaEvento"  listKey="ID_EVENTO"  listValue="NOM_EVENTO" headerKey=""  headerValue="--SELECCIONE--"  cssClass="selectpicker col-lg-6" onchange="Javascript:ConsultaNomEvento('ConsultaNomEvento')" />
+                                                                                       <s:iterator value="ListaEvento" id="ListaEvento" status="stat">                        
+                                                                                                        <s:hidden  name = "ListaEvento[%{#stat.index}].ID_EVENTO" id="ID_EVENTO"></s:hidden>
+                                                                                                        <s:hidden  name = "ListaEvento[%{#stat.index}].NOM_EVENTO" id="NOM_EVENTO"></s:hidden>
+                                                                                       </s:iterator>
+                                                                                 </div> 
+                                                                                       <s:if test="ListaNomEve.size()>0">
+                                                                                  <div class="col-lg-6">
+                                                                                       <label for="SECTOR">SELECCIONE EL NOMBRE DEL EVENTO QUE TOMO:</label>
+                                                                                       <s:select  data-style="select-with-transition"   name="res.ID_NOMBRE_EVENTO" id="res.ID_NOMBRE_EVENTO" list="ListaNomEve"  listKey="ID_NOM_EVE"  listValue="DESCRIPCION" headerKey=""  headerValue="--SELECCIONE--"  cssClass="selectpicker col-lg-6"  />
+                                                                                       <s:iterator value="ListaNomEve" id="ListaNomEve" status="stat">                        
+                                                                                                        <s:hidden  name = "ListaNomEve[%{#stat.index}].ID_NOM_EVE" id="ID_NOM_EVE"></s:hidden>
+                                                                                                        <s:hidden  name = "ListaNomEve[%{#stat.index}].DESCRIPCION" id="DESCRIPCION"></s:hidden>
+                                                                                       </s:iterator>
+                                                                                 </div> 
+                                                                                 </s:if>
+                                                                                 <br></br>
+                                                                                 <div class="col-lg-6">
+                                                                                       <label for="SECTOR">TIPO DE PARTICIPANTE:</label>
+                                                                                       <s:radio list="ListaTipo" listKey="ID_TIPO" listValue="DESCRIPCION"  name="res.ID_TIPO_PARTICIPANTE"  />
+                                                                                       
+                                                                                       <s:iterator value="ListaTipo" id="ListaTipo" status="stat">                        
+                                                                                                        <s:hidden  name = "ListaTipo[%{#stat.index}].ID_TIPO" id="ID_TIPO"></s:hidden>
+                                                                                                        <s:hidden  name = "ListaTipo[%{#stat.index}].DESCRIPCION" id="DESCRIPCION"></s:hidden>
+                                                                                       </s:iterator>
+                                                                                 </div> 
+                                                                                 <br></br>      
+                                                                                 <div class="col-lg-6">
+                                                                                      <label for="SECTOR">GENERO:</label>
+                                                                                       <s:radio label="Genero" name="res.GENERO" list="#{'1':'HOMBRE','2':'MUJER'}" value="2" />    
+                                                                                 </div>   
+                                                                                 
+                                                                                 <div class="col-lg-4">
+                                                                                      <label  for="EDAD">EDAD:</label>                                                                                       
+                                                                                      <s:textfield  cssClass="form-control" name="res.EDAD" id="res.EDAD" ></s:textfield>                                                                                                             
+                                                                                </div>
                                                                             </div>
                                                                             <div class="card-body">
                                                                                  <s:fielderror  fieldName="ERRORPREG" cssClass="col-lg-12 alert alert-danger"></s:fielderror>

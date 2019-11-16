@@ -23,7 +23,10 @@ import java.util.List;
 import mappers.ConsultaRespuestasMapper;
 import mappers.CuestionarioMapper;
 import mappers.EncabezadoMapper;
+import mappers.EventoMapper;
+import mappers.NombreEventoMapper;
 import mappers.RespuestasMapper;
+import mappers.TipoMapper;
 
 
 import utilidades.Constantes;
@@ -56,7 +59,29 @@ public class EvaluarDAOImpl {
         return stei;
     }
     
+    public List ConsultaEventos() throws Exception {
+        String query = "SELECT id_evento,nombre_evento FROM cat_evento where status=1";
+        Constantes.enviaMensajeConsola("Consulta eventos----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new EventoMapper());
+        return list;
+    }
     
+    public List ConsultaTipos() throws Exception {
+        String query = "SELECT id_tipo,descripcion FROM cat_tipo_participante where status=1";
+        Constantes.enviaMensajeConsola("Consulta eventos----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new TipoMapper());
+        return list;
+    }
+    
+    public List ConsultaNomEvento(String idevento) throws Exception {
+        String query = "SELECT id_nom_eve,descripcion FROM cat_nombre_evento where id_evento='"+idevento+"' AND status=1";
+        Constantes.enviaMensajeConsola("Consulta nombre eventos----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new NombreEventoMapper());
+        return list;
+    }
     
 
     public List ConsultaSecciones() throws Exception {
@@ -169,7 +194,15 @@ public class EvaluarDAOImpl {
         return list;
     }
     
-    public boolean GuardaEvaluacionUE(Connection conn, PreparedStatement stat,Res_ConBean res) throws Exception {
+    public String ConsultaIdDato(String folio) throws Exception {
+        String query = "SELECT id_dato FROM tbl_datos_generales where folio='"+folio+"'";
+        Constantes.enviaMensajeConsola("Consulta id datos ----->" + query);
+        String valor = null;
+        valor = oraDaoFac.queryStringUnCampo(query);
+        return valor;
+    }
+    
+    public boolean GuardaDatos(Res_ConBean res) throws Exception {
 
 //Crear un ArrayList para agregar los campos a insertar
         ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
@@ -179,7 +212,35 @@ public class EvaluarDAOImpl {
         Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
 
 //En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
-        temporal = new ObjPrepareStatement("ID_IE_UE", "STRING", res.getID_IE_UE());
+        
+        temporal = new ObjPrepareStatement("FOLIO", "STRING", res.getFOLIO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_NOM_EVE", "STRING", res.getID_NOMBRE_EVENTO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_TIPO", "STRING", res.getID_TIPO_PARTICIPANTE());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_GENERO", "STRING", res.getGENERO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("EDAD", "STRING", res.getEDAD());
+        arregloCampos.add(temporal);
+        
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+        return oraDaoFac.queryInsert("TBL_DATOS_GENERALES", arregloCampos);
+    }
+    
+    public boolean GuardaEvaluacion(Connection conn, PreparedStatement stat,Res_ConBean res) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        temporal = new ObjPrepareStatement("ID_DATO", "STRING", res.getID_DATO());
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("ID_ENCABEZADO", "STRING", res.getID_ENCABEZADO());
         arregloCampos.add(temporal);
@@ -191,7 +252,7 @@ public class EvaluarDAOImpl {
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
-        return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_EVALUACION_UE", arregloCampos);
+        return oraDaoFac.queryInsertTransaccion(conn, stat,"TBL_EVALUACION_ENCUESTA", arregloCampos);
     }
     
      public boolean ActualizaEvaluacionUE(Connection conn, PreparedStatement stat,Res_ConBean res) throws Exception {
@@ -208,7 +269,7 @@ public class EvaluarDAOImpl {
         temporal = new ObjPrepareStatement("ID_RESPUESTA", "STRING", res.getID_RESPUESTA());
         arregloCampos.add(temporal);
         
-        String Condicion="where ID_IE_UE='"+res.getID_IE_UE()+"' AND ID_ENCABEZADO='"+res.getID_ENCABEZADO()+"' AND ID_PREGUNTA='"+res.getID_PREGUNTA()+"' ";
+        String Condicion="where ID_IE_UE='"+res.getFOLIO()+"' AND ID_ENCABEZADO='"+res.getID_ENCABEZADO()+"' AND ID_PREGUNTA='"+res.getID_PREGUNTA()+"' ";
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara

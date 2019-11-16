@@ -10,13 +10,27 @@ package beans;
  * @author gioca
  */
 public class Res_ConBean {
+    private String ID_DATO;
     private String ID_EVALUACION;
-    private String ID_IE_UE;
+    private String ID_EVENTO;
+    private String ID_NOMBRE_EVENTO;
+    private String GENERO;
+    private String EDAD;
+    private String FOLIO;
+    private String ID_TIPO_PARTICIPANTE;
     private String ID_ENCABEZADO;
     private String ID_PREGUNTA;
     private String ID_RESPUESTA;
     private String RESPUESTA;
     private String FEC_REG;
+
+    public String getID_DATO() {
+        return ID_DATO;
+    }
+
+    public void setID_DATO(String ID_DATO) {
+        this.ID_DATO = ID_DATO;
+    }
 
     public String getID_EVALUACION() {
         return ID_EVALUACION;
@@ -25,15 +39,53 @@ public class Res_ConBean {
     public void setID_EVALUACION(String ID_EVALUACION) {
         this.ID_EVALUACION = ID_EVALUACION;
     }
-    
-    
 
-    public String getID_IE_UE() {
-        return ID_IE_UE;
+    public String getID_EVENTO() {
+        return ID_EVENTO;
     }
 
-    public void setID_IE_UE(String ID_IE_UE) {
-        this.ID_IE_UE = ID_IE_UE;
+    public void setID_EVENTO(String ID_EVENTO) {
+        this.ID_EVENTO = ID_EVENTO;
+    }
+
+    public String getID_NOMBRE_EVENTO() {
+        return ID_NOMBRE_EVENTO;
+    }
+
+    public void setID_NOMBRE_EVENTO(String ID_NOMBRE_EVENTO) {
+        this.ID_NOMBRE_EVENTO = ID_NOMBRE_EVENTO;
+    }
+
+    public String getGENERO() {
+        return GENERO;
+    }
+
+    public void setGENERO(String GENERO) {
+        this.GENERO = GENERO;
+    }
+
+    public String getEDAD() {
+        return EDAD;
+    }
+
+    public void setEDAD(String EDAD) {
+        this.EDAD = EDAD;
+    }
+
+    public String getFOLIO() {
+        return FOLIO;
+    }
+
+    public void setFOLIO(String FOLIO) {
+        this.FOLIO = FOLIO;
+    }
+
+    public String getID_TIPO_PARTICIPANTE() {
+        return ID_TIPO_PARTICIPANTE;
+    }
+
+    public void setID_TIPO_PARTICIPANTE(String ID_TIPO_PARTICIPANTE) {
+        this.ID_TIPO_PARTICIPANTE = ID_TIPO_PARTICIPANTE;
     }
 
     public String getID_ENCABEZADO() {
@@ -75,7 +127,7 @@ public class Res_ConBean {
     public void setFEC_REG(String FEC_REG) {
         this.FEC_REG = FEC_REG;
     }
-    
+
     
     
 }

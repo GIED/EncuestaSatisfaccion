@@ -5,6 +5,9 @@
  */
 package action;
 
+import beans.Cat_EventoBean;
+import beans.Cat_Nom_EveBean;
+import beans.Cat_TipoParticipanteBean;
 import beans.EncabezadoBean;
 import beans.PreguntasBean;
 import beans.Res_ConBean;
@@ -48,7 +51,13 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
     public List<moduloBean> modulosAUX = new ArrayList<moduloBean>();
     public List<moduloAuxBean> modulosAUXP = new ArrayList<moduloAuxBean>();
 
+    private List<Cat_EventoBean> ListaEvento= new ArrayList<Cat_EventoBean>(); 
+    private List<Cat_Nom_EveBean> ListaNomEve= new ArrayList<Cat_Nom_EveBean>();
+    private List<Cat_TipoParticipanteBean> ListaTipo= new ArrayList<Cat_TipoParticipanteBean>();
 
+    public Evaluacion_Action() {
+    }
+    
     private List<EncabezadoBean> ListaEncabezado = new ArrayList<EncabezadoBean>();
     private List<PreguntasBean> listaPregEnca = new ArrayList<PreguntasBean>();
 
@@ -63,15 +72,7 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
     PreparedStatement objPreConexion;
     Connection conecta;
     
-    String FOLIO;
-
-    public String getFOLIO() {
-        return FOLIO;
-    }
-
-    public void setFOLIO(String FOLIO) {
-        this.FOLIO = FOLIO;
-    }
+    
     
     
 
@@ -100,7 +101,8 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
 
             EvaluarDAOImpl con = new EvaluarDAOImpl();
 
-            Constantes.enviaMensajeConsola("folio: " + getFOLIO());
+           ListaEvento=con.ConsultaEventos();
+           ListaTipo=con.ConsultaTipos();
             
             ListaEncabezado = con.ConsSecciones();
             ListaRespuestas1 = con.ConsultaRespuestas1();
@@ -111,6 +113,40 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
             Constantes.enviaMensajeConsola("lista Respuesta: " + ListaRespuestas2.size());
 
             banMuestraForm = true;
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+    
+    public String ConsultaNomEvento() {
+
+       /* //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }*/
+
+        try {
+
+            EvaluarDAOImpl con = new EvaluarDAOImpl();
+
+           ListaNomEve=con.ConsultaNomEvento(res.getID_EVENTO());
+            
+            
 
             return "SUCCESS";
 
@@ -168,7 +204,7 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
 
     public String GuardaEvaluacion() {
 
-        //validando session***********************************************************************
+       /* //validando session***********************************************************************
         if (session.get("cveUsuario") != null) {
             String sUsu = (String) session.get("cveUsuario");
         } else {
@@ -180,7 +216,7 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
         } else {
             addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
             return "SESSION";
-        }
+        }*/
 
         try {
 
@@ -192,28 +228,7 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
             objConexion = con.crearStatement(conecta);
             //ListaSecciones=(ArrayList<Bean_Secciones>) superior.ConsSecciones(CveCuestionario);
 
-            int cont_preg = 0;
-            int cont_res = 0;
-            int total_aciertos = 0;
-            float total = 0;
-            int porcentaje = 0;
-
-            int cont_preg2 = 0;
-            int cont_res2 = 0;
-            int total_aciertos2 = 0;
-            float total2 = 0;
-            int porcentaje2 = 0;
-
-            int cont_preg3 = 0;
-            int cont_res3 = 0;
-            int total_aciertos3 = 0;
-            float total3 = 0;
-            int porcentaje3 = 0;
-
-            int suma_porcentajes = 0;
-            float total_general = 0;
-            int porcentaje_total = 0;
-
+           
             boolean respuestas;
 
             int contador = 0;
@@ -244,6 +259,10 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
 
                 //Constantes.enviaMensajeConsola("ID que llega: "+ue.getID_IE_UE());
                 Constantes.enviaMensajeConsola("ListaContestados: " + ListaContestados.size());
+                
+                con.GuardaDatos(res);
+                
+                res.setID_DATO(con.ConsultaIdDato(res.getFOLIO()));
 
                 for (int i = 0; i < ListaContestados.size(); i++) {
 
@@ -252,75 +271,21 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                     res.setID_RESPUESTA(ListaContestados.get(i).getID_RESPUESTA());
                     res.setRESPUESTA(ListaContestados.get(i).getID_RESPUESTA());
 
-                    Constantes.enviaMensajeConsola("id ie ue: " + res.getID_IE_UE());
+                  
                     Constantes.enviaMensajeConsola("id encabezado: " + res.getID_ENCABEZADO());
                     Constantes.enviaMensajeConsola("id pregunta: " + res.getID_PREGUNTA());
                     Constantes.enviaMensajeConsola("id respuesta: " + res.getID_RESPUESTA());
 
-                    con.GuardaEvaluacionUE(conecta, objPreConexion, res);
+                    con.GuardaEvaluacion(conecta, objPreConexion, res);
 
-                    if (res.getID_ENCABEZADO().equals("1")) {
-                        cont_preg = cont_preg + 1;
-                        cont_res = cont_res + Integer.valueOf(res.getID_RESPUESTA());
-                    }
-
-                    if (res.getID_ENCABEZADO().equals("2")) {
-                        cont_preg2 = cont_preg2 + 1;
-                        cont_res2 = cont_res2 + Integer.valueOf(res.getID_RESPUESTA());
-                    }
-
-                    if (res.getID_ENCABEZADO().equals("3")) {
-                        cont_preg3 = cont_preg3 + 1;
-                        cont_res3 = cont_res3 + Integer.valueOf(res.getID_RESPUESTA());
-                    }
+                    
 
                 }
 
                 //cerrando conexiones...
                 cierraConexiones();
-
-                Constantes.enviaMensajeConsola("seccion 1: ");
-
-                total_aciertos = cont_preg * 2;
-                total = (float) cont_res / total_aciertos;
-                porcentaje = (int) (total * 100);
-
-            Constantes.enviaMensajeConsola("total aciertos: " + total_aciertos);
-            Constantes.enviaMensajeConsola("total respuesta: " + cont_res);
-            Constantes.enviaMensajeConsola("total : " + total);
-            Constantes.enviaMensajeConsola("porcentaje : " + porcentaje);
-                Constantes.enviaMensajeConsola("seccion 2: ");
-
-                total_aciertos2 = cont_preg2 * 3;
-                total2 = (float) cont_res2 / total_aciertos2;
-                porcentaje2 = (int) (total2 * 100);
-
-            Constantes.enviaMensajeConsola("total aciertos2: " + total_aciertos2);
-            Constantes.enviaMensajeConsola("total respuesta2: " + cont_res2);
-            Constantes.enviaMensajeConsola("total 2: " + total2);
-            Constantes.enviaMensajeConsola("porcentaje 2: " + porcentaje2);
-                Constantes.enviaMensajeConsola("seccion 3: ");
-
-                total_aciertos3 = cont_preg3 * 3;
-                total3 = (float) cont_res3 / total_aciertos3;
-                porcentaje3 = (int) (total3 * 100);
-
-            Constantes.enviaMensajeConsola("total aciertos3: " + total_aciertos3);
-            Constantes.enviaMensajeConsola("total respuesta3: " + cont_res3);
-            Constantes.enviaMensajeConsola("total 3: " + total3);
-            Constantes.enviaMensajeConsola("porcentaje 3: " + porcentaje3);
-                suma_porcentajes = porcentaje + porcentaje2 + porcentaje3;
-                total_general = (float) suma_porcentajes / 3;
-                porcentaje_total = (int) (total_general);
-
-                Constantes.enviaMensajeConsola("suma porcentajes: " + suma_porcentajes);
-                Constantes.enviaMensajeConsola("total general: " + total_general);
-                Constantes.enviaMensajeConsola("porcentaje total: " + porcentaje_total);
-
-              
-
                 ListaContestados.clear();
-
+                res.setFOLIO("");
                 banMuestraForm = false;
 
             }
@@ -422,7 +387,7 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                     res.setRESPUESTA(ListaContestados.get(i).getID_RESPUESTA());
 
                     
-                    Constantes.enviaMensajeConsola("id ie ue: " + res.getID_IE_UE());
+               
                     Constantes.enviaMensajeConsola("id encabezado: " + res.getID_ENCABEZADO());
                     Constantes.enviaMensajeConsola("id pregunta: " + res.getID_PREGUNTA());
                     Constantes.enviaMensajeConsola("id respuesta: " + res.getID_RESPUESTA());
@@ -629,9 +594,33 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
     public void setBanMuestraFormAct(boolean banMuestraFormAct) {
         this.banMuestraFormAct = banMuestraFormAct;
     }
-    
-    
 
+    public List<Cat_EventoBean> getListaEvento() {
+        return ListaEvento;
+    }
+
+    public void setListaEvento(List<Cat_EventoBean> ListaEvento) {
+        this.ListaEvento = ListaEvento;
+    }
+
+    public List<Cat_Nom_EveBean> getListaNomEve() {
+        return ListaNomEve;
+    }
+
+    public void setListaNomEve(List<Cat_Nom_EveBean> ListaNomEve) {
+        this.ListaNomEve = ListaNomEve;
+    }
+
+    public List<Cat_TipoParticipanteBean> getListaTipo() {
+        return ListaTipo;
+    }
+
+    public void setListaTipo(List<Cat_TipoParticipanteBean> ListaTipo) {
+        this.ListaTipo = ListaTipo;
+    }
+    
+    
+    
    
 
     public List<EncabezadoBean> getListaEncabezado() {

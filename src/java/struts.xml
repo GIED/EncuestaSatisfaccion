@@ -38,6 +38,20 @@
             <result name="ERROR">/pages/index.jsp</result>
             <result name="input">/pages/index.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="ConsultaNomEvento" class="action.Evaluacion_Action" method="ConsultaNomEvento">
+            <result name="SUCCESS">/pages/index.jsp</result>			              
+            <result name="ERROR">/pages/index.jsp</result>
+            <result name="input">/pages/index.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="GuardaEvaluacion" class="action.Evaluacion_Action" method="GuardaEvaluacion">
+            <result name="SUCCESS">/pages/index.jsp</result>			              
+            <result name="ERROR">/pages/index.jsp</result>
+            <result name="input">/pages/index.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
         </action>	
         
 		
