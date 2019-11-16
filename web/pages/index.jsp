@@ -6,6 +6,45 @@
 
 <script type="text/javascript">
     
+     function validarSiNumero(numero){
+    if (!/^\-?[1-9]\d{0,2}$/.test(numero))
+     
+    
+     
+     document.getElementById('EDAD').value="";
+     
+  }
+    
+    function telquita() {
+  var x = document.getElementById("quitamen").style="display:none;";
+  
+}
+ function telquita1() {
+  var x = document.getElementById("quitamen1").style="display:none;";
+  
+}
+
+ function telquita2() {
+  var x = document.getElementById("quitamen2").style="display:none;";
+  
+}
+
+ function telquita3() {
+  var x = document.getElementById("quitamen3").style="display:none;";
+  
+}
+
+ function telquita4() {
+  var x = document.getElementById("quitamen4").style="display:none;";
+  
+}
+
+ function telquita5() {
+  var x = document.getElementById("quitamen5").style="display:none;";
+  
+}
+
+    
 
 function IniciaEvaluacion(accion) {
 
@@ -142,181 +181,116 @@ function ConsultaNomEvento(accion) {
 
                     <body class="">
                         <s:form name="formularioPrincipal" id="formularioPrincipal" enctype="multipart/form-data">
-                            <div class="wrapper ">
-                                <div class="sidebar" data-color="rose" data-background-color="black" data-image="assets/img/sidebar-1.jpg">
-                                    <!--
-                                      Tip 1: You can change the color of the sidebar using: data-color="purple | azure | green | orange | danger"
-                              
-                                      Tip 2: you can also add an image using data-image tag
-                                    -->
-                                    <div class="logo">
-                                        <a href="#" class="simple-text logo-normal" style="text-align: center;">
-                                            Estado de México
-                                        </a>
-                                    </div>
-                                    <div class="sidebar-wrapper">
-                                        <div class="user">
-                                            <div class="photo">
-                                                <img src="assets/img/faces/m.png" />
-                                            </div>
-                                            <div class="user-info">
-                                                <a data-toggle="collapse" href="#collapseExample" class="username">
-                                                    <span>
-                                                        <s:property value="usuariocons.USUARIO"></s:property>
-                                                            <!--  <b class="caret"></b> -->
-                                                        </span>
-                                                    </a>
-                                                    <div class="collapse" id="collapseExample">
-                                                        <!-- <ul class="nav">
-                                                           <li class="nav-item">
-                                                             <a class="nav-link" href="#">
-                                                               <span class="sidebar-mini"> MP </span>
-                                                               <span class="sidebar-normal"> My Profile </span>
-                                                             </a>
-                                                           </li>
-                                                           <li class="nav-item">
-                                                             <a class="nav-link" href="#">
-                                                               <span class="sidebar-mini"> EP </span>
-                                                               <span class="sidebar-normal"> Edit Profile </span>
-                                                             </a>
-                                                           </li>
-                                                           <li class="nav-item">
-                                                             <a class="nav-link" href="#">
-                                                               <span class="sidebar-mini"> S </span>
-                                                               <span class="sidebar-normal"> Settings </span>
-                                                             </a>
-                                                           </li>
-                                                         </ul> -->
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <ul class="nav">
-                                            <jsp:include page="menu.jsp"></jsp:include>	
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="main-panel">
+                            <div class="wrapper " style="margin-top: 50px;">
+                                
+                                <div style="max-width: 900px;  margin: auto;">
                                         <!-- Navbar -->
-                                        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute fixed-top ">
-                                            <div class="container-fluid">
-                                                <div class="navbar-wrapper">
-
-                                                    <a class="navbar-brand" href="#pablo">Encuesta de Satisfacción</a>
-                                                </div>
-                                                <button class="navbar-toggler" type="button" data-toggle="collapse" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
-                                                    <span class="sr-only">Toggle navigation</span>
-                                                    <span class="navbar-toggler-icon icon-bar"></span>
-                                                    <span class="navbar-toggler-icon icon-bar"></span>
-                                                    <span class="navbar-toggler-icon icon-bar"></span>
-                                                </button>
-                                                <div class="collapse navbar-collapse justify-content-end">
-
-                                                    <ul class="navbar-nav">
-
-
-                                                        <li class="nav-item dropdown">
-                                                            <a class="nav-link" href="#pablo" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                                <i class="material-icons">person</i>
-                                                                <p class="d-lg-none d-md-block">
-                                                                    Account
-                                                                </p>
-                                                            </a>
-                                                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-
-                                                                <!-- <div class="dropdown-divider"></div>-->
-                                                                <a class="dropdown-item" href="Javascript:cerrar('CerrarSesion')">Cerrar Sesión</a>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </nav>
+                                       
                                         <!-- End Navbar -->
                                         <div class="content">
                                             <div class="row" style="margin-top: -40px;">
                                                 <div class="col-md-12">
                                                     <div class="card">
-                                                        <div class="card-header card-header-icon card-header-rose">
-                                                            <div class="card-icon">
-                                                                <i class="material-icons">perm_identity</i>
-                                                            </div>
-                                                            <h4 class="card-title">Perfil: 
-                                                                <small class="category"><s:property value="usuariocons.NAMEPERFIL"></s:property></small>
-                                                            </h4>
-                                                        </div>
+                                                       
                                                         <div class="card-body">
 
                                                             <div class="row">
                                                                   <!--FOLIO -->                  
                                                                     <div class="col-md-12" >
                                                                         <div class="card">
-                                                                            <div class="card-header card-header-primary card-header-icon">
-                                                                                <div class="card-icon" style="background: #6200ea;">
-                                                                                    <i class="material-icons" >location_city</i>
-                                                                                </div>
-                                                                                <h4 class="card-title">Encuesta de satisfación</h4>
+                                                                            
+                                                                            <div style="width: 100%;">
+                                                                                <img src="assets/img/feria.jpg" alt="" style="width: 100%;"/>
+                                                                           
+                                                                                
+                                                                            </div>
+                                                                            
+                                                                            
+                                                                            
+                                                                            <div style="width: 100%; text-align: center; margin-top: 20px;">
+                                                                                
+                                                                                <h3 class="card-title">Encuesta de satisfación</h3>
                                                                             </div>
                                                                             <div class="card-body">
-                                                                                <div class="form-group">
+                                                                                <div class="form-group" style="margin-bottom: 20px;">
+                                                                                   
                                                                                     <div class="col-12">
                                                                                         <s:textfield cssClass="form-control" name="res.FOLIO" id="res.FOLIO" placeholder="Ingrese su número de folio"></s:textfield> 
                                                                                     </div>
-                                                                                    <br></br>
+                                                                                     
+                                                                                    
+                                                                                    
+                                                                                   
+                                                                             <s:fielderror  fieldName="ERRORPREG" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
+                                                                               <s:fielderror  fieldName="SI" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
+                                                                             <br></br>
+                                                                           
                                                                                     <div class="col-12 text-center">
                                                                                         <a class="btn btn-round btn-rose"  href="Javascript:IniciaEvaluacion('MuestraForm')">Iniciar encuesta</a>
                                                                                     </div>
+                                                                             
+                                                                               <s:fielderror  fieldName="SEGUARDO" cssClass="col-lg-12 alert alert-success" cssStyle="margin-top:20px;"></s:fielderror>
+                                                                             
+                                                                             
+                                                                             
                                                                                 </div>
-                                                                            
-                                                                            </div>
-                                                                            <!-- end content-->
-                                                                        </div>
-                                                                        <!--  end card  -->
-                                                                        <s:if test="banMuestraForm">
+                                                                                 
+                                                                                    
+                                                                                    <s:if test="banMuestraForm">
                                                                             <s:hidden name="banMuestraForm" id="%{banMuestraForm}"></s:hidden>
-                                                                        <div class="card">
-                                                                            <div class="card-header text-center  font-weight-bold">
-                                                                                <h3>Encuesta de Satisfacción</h3>
-                                                                                 <div class="col-lg-6">
-                                                                                       <label for="SECTOR">SELECCIONE EL EVENTO QUE TOMO:</label>
-                                                                                       <s:select  data-style="select-with-transition"   name="res.ID_EVENTO" id="res.ID_EVENTO" list="ListaEvento"  listKey="ID_EVENTO"  listValue="NOM_EVENTO" headerKey=""  headerValue="--SELECCIONE--"  cssClass="selectpicker col-lg-6" onchange="Javascript:ConsultaNomEvento('ConsultaNomEvento')" />
+                                                                                                                                                   
+                                                                              
+                                                                                 <div class="col-lg-12" style="margin-top: 20px;">
+                                                                                       <label for="SECTOR">Actividad:</label>
+                                                                                       <s:select  cssClass="form-control"   name="res.ID_EVENTO" id="res.ID_EVENTO" list="ListaEvento"  listKey="ID_EVENTO"  listValue="NOM_EVENTO" headerKey=""  headerValue="--SELECCIONE--"   onchange="Javascript:ConsultaNomEvento('ConsultaNomEvento');telquita();" />
                                                                                        <s:iterator value="ListaEvento" id="ListaEvento" status="stat">                        
                                                                                                         <s:hidden  name = "ListaEvento[%{#stat.index}].ID_EVENTO" id="ID_EVENTO"></s:hidden>
                                                                                                         <s:hidden  name = "ListaEvento[%{#stat.index}].NOM_EVENTO" id="NOM_EVENTO"></s:hidden>
                                                                                        </s:iterator>
+                                                                                          <s:fielderror  fieldName="D1" cssClass="col-lg-12 alert alert-danger" id="quitamen1"></s:fielderror>
                                                                                  </div> 
                                                                                        <s:if test="ListaNomEve.size()>0">
-                                                                                  <div class="col-lg-6">
-                                                                                       <label for="SECTOR">SELECCIONE EL NOMBRE DEL EVENTO QUE TOMO:</label>
-                                                                                       <s:select  data-style="select-with-transition"   name="res.ID_NOMBRE_EVENTO" id="res.ID_NOMBRE_EVENTO" list="ListaNomEve"  listKey="ID_NOM_EVE"  listValue="DESCRIPCION" headerKey=""  headerValue="--SELECCIONE--"  cssClass="selectpicker col-lg-6"  />
+                                                                                  <div class="col-lg-12" style="margin-top: 20px;">
+                                                                                       <label for="SECTOR">Título de la Actividad:</label>
+                                                                                       <s:select  cssClass="form-control"   name="res.ID_NOMBRE_EVENTO" id="res.ID_NOMBRE_EVENTO" list="ListaNomEve"  listKey="ID_NOM_EVE"  listValue="DESCRIPCION" headerKey=""  headerValue="--SELECCIONE--" onchange="telquita2();"  />
                                                                                        <s:iterator value="ListaNomEve" id="ListaNomEve" status="stat">                        
                                                                                                         <s:hidden  name = "ListaNomEve[%{#stat.index}].ID_NOM_EVE" id="ID_NOM_EVE"></s:hidden>
                                                                                                         <s:hidden  name = "ListaNomEve[%{#stat.index}].DESCRIPCION" id="DESCRIPCION"></s:hidden>
                                                                                        </s:iterator>
+                                                                                                      <s:fielderror  fieldName="D2" cssClass="col-lg-12 alert alert-danger" id="quitamen2"></s:fielderror>
+
                                                                                  </div> 
                                                                                  </s:if>
-                                                                                 <br></br>
-                                                                                 <div class="col-lg-6">
-                                                                                       <label for="SECTOR">TIPO DE PARTICIPANTE:</label>
-                                                                                       <s:radio list="ListaTipo" listKey="ID_TIPO" listValue="DESCRIPCION"  name="res.ID_TIPO_PARTICIPANTE"  />
+                                                                              
+                                                                                 <div class="col-lg-12" style="margin-top: 20px;">
+                                                                                       <label for="SECTOR">Tipo Participante:</label>
+                                                                                 <s:radio list="ListaTipo" listKey="ID_TIPO" listValue="DESCRIPCION"  name="res.ID_TIPO_PARTICIPANTE" onchange="tenquita3();"  />
                                                                                        
                                                                                        <s:iterator value="ListaTipo" id="ListaTipo" status="stat">                        
                                                                                                         <s:hidden  name = "ListaTipo[%{#stat.index}].ID_TIPO" id="ID_TIPO"></s:hidden>
                                                                                                         <s:hidden  name = "ListaTipo[%{#stat.index}].DESCRIPCION" id="DESCRIPCION"></s:hidden>
                                                                                        </s:iterator>
+                                                                                                  <s:fielderror  fieldName="D3" cssClass="col-lg-12 alert alert-danger" id="quitamen3"></s:fielderror>
+
                                                                                  </div> 
-                                                                                 <br></br>      
-                                                                                 <div class="col-lg-6">
-                                                                                      <label for="SECTOR">GENERO:</label>
-                                                                                       <s:radio label="Genero" name="res.GENERO" list="#{'1':'HOMBRE','2':'MUJER'}" value="2" />    
+                                                                                  
+                                                                                                  <div class="col-lg-12" style="margin-top: 20px;">
+                                                                                      <label for="SECTOR">Género:</label>
+                                                                                                  <s:radio label="Genero" name="res.GENERO" list="#{'1':'Hombre','2':'Mujer'}" value="2" onchange="telquita4();"  />   
+                                                                                                       <s:fielderror  fieldName="D4" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+
                                                                                  </div>   
                                                                                  
-                                                                                 <div class="col-lg-4">
-                                                                                      <label  for="EDAD">EDAD:</label>                                                                                       
-                                                                                      <s:textfield  cssClass="form-control" name="res.EDAD" id="res.EDAD" ></s:textfield>                                                                                                             
+                                                                                 <div class="col-lg-12" style="margin-top: 20px;">
+                                                                                      <label  for="EDAD">Edad:</label>                                                                                       
+                                                                                 <s:textfield  cssClass="form-control" name="res.EDAD" id="EDAD" onkeyup="validarSiNumero(this.value); telquita5();"  ></s:textfield> 
+                                                                                     <s:fielderror  fieldName="D5" cssClass="col-lg-12 alert alert-danger" id="quitamen5"></s:fielderror>
+
                                                                                 </div>
-                                                                            </div>
+                                                                           
+                                                                               
                                                                             <div class="card-body">
-                                                                                 <s:fielderror  fieldName="ERRORPREG" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
+                                                                                
                                                                                 <div class="col-sm-12">                              
                                                                                     <div class="row">                                   
                                                                                         <s:if test="ListaEncabezado.size()>0">
@@ -376,6 +350,9 @@ function ConsultaNomEvento(accion) {
                                                                                                     <s:set var="NoPreg" value="1"/>
                                                                                                 </s:iterator>
                                                                                             </table>
+                                                                                                <s:fielderror  fieldName="ERRORPREG2" cssClass="col-lg-12 alert alert-danger"></s:fielderror> 
+                                                                                                
+                                                                                                
                                                                                         </s:if>
                                                                                     
                                                                                     <s:iterator value="ListaRespuestas1" id="ListaRespuestas1" status="stat1">                        
@@ -391,8 +368,7 @@ function ConsultaNomEvento(accion) {
 
                                                                                     
                                                                                 </div>  
-                                                                                &nbsp;
-                                                                                &nbsp;
+                                                                             
                                                                                 <div class=" col-md-12 text-center">
                                                                                     <a class="btn btn-round btn-rose"  href="Javascript:GuardaEvaluacion('GuardaEvaluacion')">Guardar Encuesta</a>
                                                                                 </div> 
@@ -400,108 +376,20 @@ function ConsultaNomEvento(accion) {
                                                                                 
                                                                                 
                                                                             </div>
-                                                                        </div>     
+                                                                           
                                                                         </s:if>
-                                                                        
-                                                                         <s:if test="banMuestraFormAct">
-                                                                        <div class="card">
-                                                                            <div class="card-header text-center  font-weight-bold">
-                                                                                <h3>Actualización de Evaluacion de Unidad Económica</h3>
-                                                                                
-                                                                                <p class="text-left">Se actualizara la evaluación de la unidad económica con <strong>RFC:</strong><span class="text-primary font-weight-bold"><s:property value="ue.RFC" ></s:property></span> <br></br> <strong>Razon social:</strong><span class="text-primary font-weight-bold"> <s:property value="ue.RAZON_SOCIAL"></s:property></span> <br></br> <strong>Sucursal:</strong> <span class="text-primary font-weight-bold"><s:property value="ue.NOMBRE_SUC"></s:property></span> </p> 
-                                                                                 <s:hidden name="ue.RFC" id="%{ue.RFC}"></s:hidden>
-                                                                                 <s:hidden name="ue.RAZON_SOCIAL" id="%{ue.RAZON_SOCIAL}"></s:hidden>
-                                                                                 <s:hidden name="ue.NOMBRE_SUC" id="%{ue.NOMBRE_SUC}"></s:hidden>
-                                                                                
-                                                                            </div>
-                                                                            <div class="card-body">
-                                                                                 <s:fielderror  fieldName="ERRORPREG" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
-                                                                                <div class="col-sm-12">                              
-                                                                                    <div class="row">                                   
-                                                                                        <s:if test="ListaEncabezado.size()>0">
-                                                                                            <table class="table col-lg-12" >
-                                                                                                <s:set var="NoPreg" value="1"/>
-                                                                                                <s:set var="cont" value="0" />
-                                                                                                <s:iterator value="ListaEncabezado" id="ListaEncabezado" status="stat1">
-                                                                                                    
-                                                                                                        <tr >
-                                                                                                            <td class="badge-dark" colspan="2"  >
-                                                                                                                <s:property value="NOM_ENCABEZADO"/>
-                                                                                                                <s:hidden  name = "ListaEncabezado[%{#stat1.index}].ID_ENCABEZADO" id="ID_ENCABEZADO"></s:hidden>
-                                                                                                                <s:hidden  name = "ListaEncabezado[%{#stat1.index}].NOM_ENCABEZADO" id="NOM_ENCABEZADO"></s:hidden>
-                                                                                                            </td>
-                                                                                                        </tr>    
-                                                                                                   
-                                                                                                        <s:iterator value="listaPregEnca" id="listaPregEnca" status="stat2">
-                                                                                                                         
-                                                                                                                        <tr>
-                                                                                                                        <s:hidden  name = "ListaEncabezado[%{#stat1.index}].listaPregEnca[%{#stat2.index}].PREGUNTA" id="PREGUNTA"></s:hidden>
-                                                                                                                        <s:hidden  name = "ListaEncabezado[%{#stat1.index}].listaPregEnca[%{#stat2.index}].ID_PREGUNTA" id="ID_PREGUNTA"></s:hidden>
-                                                                                                                        <s:hidden  name = "ListaEncabezado[%{#stat1.index}].listaPregEnca[%{#stat2.index}].TIPO_PREGUNTA" id="TIPO_PREGUNTA"></s:hidden>
-                                                                                                                        <s:hidden  name = "ListaEncabezado[%{#stat1.index}].listaPregEnca[%{#stat2.index}].ID_ENCABEZADO" id="ID_ENCABEZADO"></s:hidden>
-
-                                                                                                                            
-                                                                                                                                <td>
-                                                                                                                                <s:property value="#NoPreg" />)&nbsp;&nbsp;
-                                                                                                                                <%--<s:property value="#cont" />--%>
-                                                                                                                                <s:property value="PREGUNTA"/><br/>
-                                                                                                                            </td>
-                                                                                                                            <td >
-                                                                                                                                <s:if test="TIPO_PREGUNTA==100">
-                                                                                                                                    <s:select  cssClass="form-control" name="ListaContestados[%{#cont}].ID_RESPUESTA" list="ListaRespuestas1"  listKey="ID_RESPUESTA" listValue="RESPUESTA"  headerKey="" headerValue="-SELECCIONA-"  style=" width:340px"/>
-                                                                                                                                </s:if>
-                                                                                                                                <s:elseif test="TIPO_PREGUNTA==200">
-                                                                                                                                    <s:select  cssClass="form-control" name="ListaContestados[%{#cont}].ID_RESPUESTA" list="ListaRespuestas2"  listKey="ID_RESPUESTA" listValue="RESPUESTA"  headerKey="" headerValue="-SELECCIONA-"  style=" width:340px"/>
-
-                                                                                                                                </s:elseif>
-                                                                                                                                <s:hidden  name = "ListaContestados[%{#cont}].ID_ENCABEZADO" value="%{ID_ENCABEZADO}"></s:hidden>
-                                                                                                                                <s:hidden  name = "ListaContestados[%{#cont}].ID_PREGUNTA" value="%{ID_PREGUNTA}"></s:hidden>
-                                                                                                                                
-                                                                                                                                
-
-
-                                                                                                                                <s:set var="NoPreg" value="%{#NoPreg+1}"/>
-                                                                                                                                <s:set var="cont" value="%{#cont+1}"/> 
-                                                                                                                            </td>
-                                                                                                                        
-                                                                                                                            </tr>
-                                                                                                                             
-                                                                                                                    </s:iterator>                 
-                                                                                                                        
-                                                                                                                
-                                                                                                                            
-                                                                                                                                         
-                                                                                                                            
-                                                                                                    <s:set var="NoPreg" value="1"/>
-                                                                                                </s:iterator>
-                                                                                            </table>
-                                                                                        </s:if>
                                                                                     
-                                                                                    <s:iterator value="ListaRespuestas1" id="ListaRespuestas1" status="stat1">                        
-                                                                                        <s:hidden  name = "ListaRespuestas1[%{#stat1.index}].ID_RESPUESTA" id="ID_RESPUESTA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaRespuestas1[%{#stat1.index}].RESPUESTA" id="RESPUESTA"></s:hidden>
-                                                                                    </s:iterator>  
-                                                                                    <s:iterator value="ListaRespuestas2" id="ListaRespuestas2" status="stat1">                        
-                                                                                        <s:hidden  name = "ListaRespuestas2[%{#stat1.index}].ID_RESPUESTA" id="ID_RESPUESTA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaRespuestas2[%{#stat1.index}].RESPUESTA" id="RESPUESTA"></s:hidden>
-                                                                                    </s:iterator>  
-
-
-
                                                                                     
-                                                                                </div>  
-                                                                                &nbsp;
-                                                                                &nbsp;
-                                                                                <div class=" col-md-12 text-center">
-                                                                                    <a class="btn btn-round btn-rose"  href="Javascript:GuardaEvaluacion('ActualizaEvaluacion')">Actualizar Evaluación de Unidad Económica</a>
-                                                                                </div> 
-                                                                            </div>      
-                                                                                
-                                                                                
+                                                                                    
+                                                                                    
+                                                                            
                                                                             </div>
-                                                                        </div>     
-                                                                        </s:if>
+                                                                            <!-- end content-->
+                                                                        </div>
+                                                                        <!--  end card  -->
                                                                         
+                                                                        
+                                                                       
                                                                         
                                                                     </div>   
                                                                 </div>
@@ -528,7 +416,7 @@ function ConsultaNomEvento(accion) {
                                                     </ul>
                                                 </nav>
                                                 <div class="copyright float-center">
-                                                    <i class="material-icons"></i> Gobierno del Estado de México.
+                                                   
                                                     
                                                     <s:textfield name="ue.ID_ESC" id="ue.ID_ESC" cssStyle="display:none;"></s:textfield>
                                                     <s:textfield name="ue.ID_IE_UE" id="id_ue_ie" cssStyle="display:none;"></s:textfield>

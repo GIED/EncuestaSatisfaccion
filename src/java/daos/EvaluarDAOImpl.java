@@ -67,6 +67,14 @@ public class EvaluarDAOImpl {
         return list;
     }
     
+     public String ConsultaRegistro(Res_ConBean res) throws Exception {
+        String query = "SELECT  folio FROM tbl_datos_generales where folio='"+res.getFOLIO()+"'";
+        Constantes.enviaMensajeConsola("Consulta eventos----->" + query);
+        String list = null;
+      list = oraDaoFac.queryStringUnCampo(query);
+        return list;
+    }
+    
     public List ConsultaTipos() throws Exception {
         String query = "SELECT id_tipo,descripcion FROM cat_tipo_participante where status=1";
         Constantes.enviaMensajeConsola("Consulta eventos----->" + query);

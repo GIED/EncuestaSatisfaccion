@@ -71,8 +71,9 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
     Statement objConexion;
     PreparedStatement objPreConexion;
     Connection conecta;
-    
-    
+    String registrado="";
+    boolean ocultaboton =false;
+      boolean muestraboton =true;
     
     
 
@@ -100,8 +101,15 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
         try {
 
             EvaluarDAOImpl con = new EvaluarDAOImpl();
-
-           ListaEvento=con.ConsultaEventos();
+            
+            registrado=con.ConsultaRegistro(res);
+            System.out.println("el folio es "+ registrado);
+            ocultaboton=false;
+            muestraboton=true;
+            
+            if(registrado.length()==0){
+                
+                   ListaEvento=con.ConsultaEventos();
            ListaTipo=con.ConsultaTipos();
             
             ListaEncabezado = con.ConsSecciones();
@@ -113,7 +121,20 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
             Constantes.enviaMensajeConsola("lista Respuesta: " + ListaRespuestas2.size());
 
             banMuestraForm = true;
+            muestraboton=false;
+            ocultaboton=false;
+            }
+            else{
+                
+                 addFieldError("ERRORPREG", "El folio ya registro la encuesta");
+                muestraboton=true;
+                ocultaboton=false;
+               banMuestraForm = false;  
+                
+            }
+            
 
+         
             return "SUCCESS";
 
         } catch (Exception e) {
@@ -223,13 +244,12 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
             EvaluarDAOImpl con = new EvaluarDAOImpl();
 
             //abriendo la conexion.....
-            conecta = con.crearConexion();
-            //statement
-            objConexion = con.crearStatement(conecta);
+           
             //ListaSecciones=(ArrayList<Bean_Secciones>) superior.ConsSecciones(CveCuestionario);
 
            
             boolean respuestas;
+            boolean datos = false;
 
             int contador = 0;
 
@@ -239,7 +259,7 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
 
                 if (res.getID_RESPUESTA().length() == 0) {
                     contador = contador + 1;
-                    break;
+                   
                 }
 
             }
@@ -247,15 +267,60 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
             if (contador > 0) {
                 respuestas = false;
                 banMuestraForm=true;
-                addFieldError("ERRORPREG", "Debes responder todas las preguntas");
-                return "ERROR";
+                addFieldError("ERRORPREG2", "Debes responder todas las preguntas");
+              
 
             } else {
                 respuestas = true;
 
             }
+            
+            
+            if(res.getID_EVENTO().length()>0 && res.getID_NOMBRE_EVENTO().length()>0 & res.getID_TIPO_PARTICIPANTE().length()>0 && res.getGENERO().length()>0 && res.getEDAD().length()>0){
+                
+                System.out.println("estan llenos todos ");
+                datos=true;
+                
+            }
+            else{
+                
+                 System.out.println("no estan llenos todos ");
+               
+               if(res.getID_EVENTO().length()==0){
+                   
+                  addFieldError("D1", "Compo requerido");  
+               } 
+                 if(res.getID_NOMBRE_EVENTO().length()==0){
+                   
+                  addFieldError("D2", "Compo requerido");  
+               } 
+                  if(res.getID_TIPO_PARTICIPANTE().length()==0){
+                   
+                  addFieldError("D3", "Compo requerido");  
+               } 
+                   if(res.getGENERO().length()==0){
+                   
+                  addFieldError("D4", "Compo requerido");  
+               } 
+                    if(res.getEDAD().length()==0){
+                   
+                  addFieldError("D5", "Compo requerido");  
+               } 
+                
+                
+            }
+            
+            
+            
+            
+            
+            
 
-            if (respuestas) {
+            if (respuestas && datos) {
+                
+                 conecta = con.crearConexion();
+            //statement
+            objConexion = con.crearStatement(conecta);
 
                 //Constantes.enviaMensajeConsola("ID que llega: "+ue.getID_IE_UE());
                 Constantes.enviaMensajeConsola("ListaContestados: " + ListaContestados.size());
@@ -286,7 +351,14 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                 cierraConexiones();
                 ListaContestados.clear();
                 res.setFOLIO("");
+                res.setID_EVENTO("");
+                res.setID_NOMBRE_EVENTO("");
+                res.setID_TIPO_PARTICIPANTE("");
+                res.setGENERO("");
+                res.setEDAD("");
+                
                 banMuestraForm = false;
+                 addFieldError("SEGUARDO", "¡La encuesta se guardo con éxito, gracias!");
 
             }
             
@@ -696,5 +768,31 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
     public void setConecta(Connection conecta) {
         this.conecta = conecta;
     }
+
+    public String getRegistrado() {
+        return registrado;
+    }
+
+    public void setRegistrado(String registrado) {
+        this.registrado = registrado;
+    }
+
+    public boolean isOcultaboton() {
+        return ocultaboton;
+    }
+
+    public void setOcultaboton(boolean ocultaboton) {
+        this.ocultaboton = ocultaboton;
+    }
+
+    public boolean isMuestraboton() {
+        return muestraboton;
+    }
+
+    public void setMuestraboton(boolean muestraboton) {
+        this.muestraboton = muestraboton;
+    }
+    
+    
 
 }
