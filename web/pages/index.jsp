@@ -179,7 +179,8 @@ function ConsultaNomEvento(accion) {
                     <link href="assets/demo/demo.css" rel="stylesheet" />
                     </head>
 
-                    <body class="">
+                    <body class="" background="assets/img/fondo.jpg">
+                     
                         <s:form name="formularioPrincipal" id="formularioPrincipal" enctype="multipart/form-data">
                             <div class="wrapper " style="margin-top: 50px;">
                                 
@@ -200,7 +201,7 @@ function ConsultaNomEvento(accion) {
                                                                         <div class="card">
                                                                             
                                                                             <div style="width: 100%;">
-                                                                                <img src="assets/img/feria.jpg" alt="" style="width: 100%;"/>
+                                                                                <img src="assets/img/banner.jpg" alt="" style="width: 100%;"/>
                                                                            
                                                                                 
                                                                             </div>
@@ -209,7 +210,7 @@ function ConsultaNomEvento(accion) {
                                                                             
                                                                             <div style="width: 100%; text-align: center; margin-top: 20px;">
                                                                                 
-                                                                                <h3 class="card-title">Encuesta de satisfación</h3>
+                                                                                <h3 class="card-title">Encuesta de satisfacción</h3>
                                                                             </div>
                                                                             <div class="card-body">
                                                                                 <div class="form-group" style="margin-bottom: 20px;">
@@ -238,10 +239,15 @@ function ConsultaNomEvento(accion) {
                                                                                     
                                                                                     <s:if test="banMuestraForm">
                                                                             <s:hidden name="banMuestraForm" id="%{banMuestraForm}"></s:hidden>
+                                                                            
+                                                                            <div style="padding: 10px; color:white; text-align: center; background: purple; min-height: 30px; max-height: 50px; border-radius: 20px; box-shadow: 1px 1px 3px #000;">
+                                                                                    Estimado usuario, gracias a su colaboración podremos mejorar en próximos foros aquellos aspectos que usted nos haga constar
+                                                                            
+                                                                            </div>
                                                                                                                                                    
                                                                               
                                                                                  <div class="col-lg-12" style="margin-top: 20px;">
-                                                                                       <label for="SECTOR">Actividad:</label>
+                                                                                       <label for="SECTOR">Conferencia/Taller:</label>
                                                                                        <s:select  cssClass="form-control"   name="res.ID_EVENTO" id="res.ID_EVENTO" list="ListaEvento"  listKey="ID_EVENTO"  listValue="NOM_EVENTO" headerKey=""  headerValue="--SELECCIONE--"   onchange="Javascript:ConsultaNomEvento('ConsultaNomEvento');telquita();" />
                                                                                        <s:iterator value="ListaEvento" id="ListaEvento" status="stat">                        
                                                                                                         <s:hidden  name = "ListaEvento[%{#stat.index}].ID_EVENTO" id="ID_EVENTO"></s:hidden>
@@ -251,7 +257,7 @@ function ConsultaNomEvento(accion) {
                                                                                  </div> 
                                                                                        <s:if test="ListaNomEve.size()>0">
                                                                                   <div class="col-lg-12" style="margin-top: 20px;">
-                                                                                       <label for="SECTOR">Título de la Actividad:</label>
+                                                                                       <label for="SECTOR">Nombre de la Conferencia/Taller:</label>
                                                                                        <s:select  cssClass="form-control"   name="res.ID_NOMBRE_EVENTO" id="res.ID_NOMBRE_EVENTO" list="ListaNomEve"  listKey="ID_NOM_EVE"  listValue="DESCRIPCION" headerKey=""  headerValue="--SELECCIONE--" onchange="telquita2();"  />
                                                                                        <s:iterator value="ListaNomEve" id="ListaNomEve" status="stat">                        
                                                                                                         <s:hidden  name = "ListaNomEve[%{#stat.index}].ID_NOM_EVE" id="ID_NOM_EVE"></s:hidden>
@@ -263,8 +269,8 @@ function ConsultaNomEvento(accion) {
                                                                                  </s:if>
                                                                               
                                                                                  <div class="col-lg-12" style="margin-top: 20px;">
-                                                                                       <label for="SECTOR">Tipo Participante:</label>
-                                                                                 <s:radio list="ListaTipo" listKey="ID_TIPO" listValue="DESCRIPCION"  name="res.ID_TIPO_PARTICIPANTE" onchange="tenquita3();"  />
+                                                                                       <label for="SECTOR">Participante:</label>
+                                                                                 <s:radio list="ListaTipo" listKey="ID_TIPO" listValue="DESCRIPCION"  name="res.ID_TIPO_PARTICIPANTE" onchange="tenquita3();" cssClass="togglebutton switch-sidebar-mini" cssStyle="margin-left:15px;"  />
                                                                                        
                                                                                        <s:iterator value="ListaTipo" id="ListaTipo" status="stat">                        
                                                                                                         <s:hidden  name = "ListaTipo[%{#stat.index}].ID_TIPO" id="ID_TIPO"></s:hidden>
@@ -276,7 +282,7 @@ function ConsultaNomEvento(accion) {
                                                                                   
                                                                                                   <div class="col-lg-12" style="margin-top: 20px;">
                                                                                       <label for="SECTOR">Género:</label>
-                                                                                                  <s:radio label="Genero" name="res.GENERO" list="#{'1':'Hombre','2':'Mujer'}" value="2" onchange="telquita4();"  />   
+                                                                                                  <s:radio label="Genero" name="res.GENERO" list="#{'1':'Hombre','2':'Mujer'}" value="2" onchange="telquita4();" cssStyle="margin-left:15px;"  />   
                                                                                                        <s:fielderror  fieldName="D4" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
 
                                                                                  </div>   
@@ -370,8 +376,13 @@ function ConsultaNomEvento(accion) {
                                                                                 </div>  
                                                                              
                                                                                 <div class=" col-md-12 text-center">
-                                                                                    <a class="btn btn-round btn-rose"  href="Javascript:GuardaEvaluacion('GuardaEvaluacion')">Guardar Encuesta</a>
+                                                                                    <a class="btn btn-round btn-rose"  href="Javascript:GuardaEvaluacion('GuardaEvaluacion')">Guardar e imprimir constancia</a>
                                                                                 </div> 
+                                                                                    <div style="width: 100%; color:red; text-align: center; margin-top: 10px;">
+                                                                                    <s:fielderror  fieldName="D6" ></s:fielderror> 
+                                                                                    </div>  
+                                                                                    
+                                                                                    
                                                                             </div>      
                                                                                 
                                                                                 

@@ -362,6 +362,12 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
 
             }
             
+            else{
+                
+                 addFieldError("D6", "¡Todos los campos son requeridos, favor de verificar!");
+                
+            }
+            
              return "SUCCESS";
 
         } catch (Exception e) {
