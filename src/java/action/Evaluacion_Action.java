@@ -18,6 +18,7 @@ import beans.moduloBean;
 import beans.usuarioBean;
 
 import com.opensymphony.xwork2.ActionSupport;
+import com.opensymphony.xwork2.util.logging.Logger;
 import daos.EvaluarDAOImpl;
 
 import java.sql.Connection;
@@ -274,9 +275,9 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                 respuestas = true;
 
             }
+            System.out.println("id_participante" + res.getID_TIPO_PARTICIPANTE());
             
-            
-            if(res.getID_EVENTO().length()>0 && res.getID_NOMBRE_EVENTO().length()>0 & res.getID_TIPO_PARTICIPANTE().length()>0 && res.getGENERO().length()>0 && res.getEDAD().length()>0){
+            if(res.getID_EVENTO().length()>0 && res.getID_NOMBRE_EVENTO().length()>0 && res.getID_TIPO_PARTICIPANTE()!=null && res.getGENERO()!=null && res.getEDAD().length()>0){
                 
                 System.out.println("estan llenos todos ");
                 datos=true;
@@ -294,11 +295,11 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                    
                   addFieldError("D2", "Compo requerido");  
                } 
-                  if(res.getID_TIPO_PARTICIPANTE().length()==0){
+                  if(res.getID_TIPO_PARTICIPANTE()==null ){
                    
                   addFieldError("D3", "Compo requerido");  
                } 
-                   if(res.getGENERO().length()==0){
+                   if(res.getGENERO()==null){
                    
                   addFieldError("D4", "Compo requerido");  
                } 
@@ -797,6 +798,14 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
 
     public void setMuestraboton(boolean muestraboton) {
         this.muestraboton = muestraboton;
+    }
+
+    public static Logger getLOG() {
+        return LOG;
+    }
+
+    public static void setLOG(Logger LOG) {
+        ActionSupport.LOG = LOG;
     }
     
     

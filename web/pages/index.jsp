@@ -270,7 +270,7 @@ function ConsultaNomEvento(accion) {
                                                                               
                                                                                  <div class="col-lg-12" style="margin-top: 20px;">
                                                                                        <label for="SECTOR">Participante:</label>
-                                                                                 <s:radio list="ListaTipo" listKey="ID_TIPO" listValue="DESCRIPCION"  name="res.ID_TIPO_PARTICIPANTE" onchange="tenquita3();" cssClass="togglebutton switch-sidebar-mini" cssStyle="margin-left:15px;"  />
+                                                                                 <s:radio list="ListaTipo" listKey="ID_TIPO" listValue="DESCRIPCION"  name="res.ID_TIPO_PARTICIPANTE" onchange="tenquita3();"  cssStyle="margin-left:15px;"  />
                                                                                        
                                                                                        <s:iterator value="ListaTipo" id="ListaTipo" status="stat">                        
                                                                                                         <s:hidden  name = "ListaTipo[%{#stat.index}].ID_TIPO" id="ID_TIPO"></s:hidden>
