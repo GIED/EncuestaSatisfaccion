@@ -278,7 +278,7 @@ function ConsultaNomEvento(accion) {
                                                                             
                                                                             <div style="width: 100%; text-align: center; margin-top: 20px;">
                                                                                 
-                                                                                <h3 class="card-title">Encuesta de satisfacción</h3>
+                                                                                <h3 class="card-title">Materiales</h3>
                                                                             </div>
                                                                             <div class="card-body">
                                                                                 <div class="form-group" style="margin-bottom: 20px;">
@@ -296,198 +296,80 @@ function ConsultaNomEvento(accion) {
                                                                              <br></br>
                                                                              <div id="btnvalidar" style="display: none;">
                                                                                     <div class="col-12 text-center">
-                                                                                        <a class="btn btn-round btn-rose"  href="Javascript:IniciaEvaluacion('MuestraForm')">Consultar Folio</a>
+                                                                                        <a class="btn btn-round btn-rose"  href="Javascript:IniciaEvaluacion('MuestraMateriales')">Consultar Folio</a>
                                                                                     </div>
                                                                              </div>
                                                                                <s:fielderror  fieldName="SEGUARDO" cssClass="col-lg-12 alert alert-success" cssStyle="margin-top:20px;"></s:fielderror>
                                                                              
-                                                                               <s:if test="banConstancia">
-                                                                                   
-                                                                                   <div style="width: 50%; margin: auto; text-align: center;">
-                                                                                       <a href="constancia/conatncia.pdf" target="_blank">
-                                                                                               
-                                                                                               <img src="assets/img/pdf-icon.png" alt="" style="max-width: 100px;"/></a>
-                                                                                   </div>
-                                                                                   <div style="width: 50%; margin: auto; text-align: center;">
-                                                                                          Descargar constancia
-                                                                                   </div>
-                                                                                   
-                                                                               </s:if>
+                                                                             
                                                                              
                                                                              
                                                                                 </div>
-                                                                                 
-                                                                                    
-                                                                                    <s:if test="banMuestraForm">
-                                                                            <s:hidden name="banMuestraForm" id="%{banMuestraForm}"></s:hidden>
-                                                                            
-                                                                            <div style="padding: 10px; color:white; text-align: center; background: purple; min-height: 30px; max-height: 50px; border-radius: 20px; box-shadow: 1px 1px 3px #000;">
-                                                                                    Estimado usuario, gracias a su colaboración podremos mejorar en próximos foros aquellos aspectos que usted nos haga constar
-                                                                            
-                                                                            </div>
-                                                                                                                                                   
-                                                                              
-                                                                                 <div class="col-lg-12" style="margin-top: 20px;">
-                                                                                       <label for="SECTOR">Conferencia/Taller:</label>
-                                                                                       <s:select  cssClass="form-control"   name="res.ID_EVENTO" id="res.ID_EVENTO" list="ListaEvento"  listKey="ID_EVENTO"  listValue="NOM_EVENTO" headerKey=""  headerValue="--SELECCIONE--"   onchange="Javascript:ConsultaNomEvento('ConsultaNomEvento');telquita();" />
-                                                                                       <s:iterator value="ListaEvento" id="ListaEvento" status="stat">                        
-                                                                                                        <s:hidden  name = "ListaEvento[%{#stat.index}].ID_EVENTO" id="ID_EVENTO"></s:hidden>
-                                                                                                        <s:hidden  name = "ListaEvento[%{#stat.index}].NOM_EVENTO" id="NOM_EVENTO"></s:hidden>
-                                                                                       </s:iterator>
-                                                                                          <s:fielderror  fieldName="D1" cssClass="col-lg-12 alert alert-danger" id="quitamen1"></s:fielderror>
-                                                                                 </div> 
-                                                                                       <s:if test="ListaNomEve.size()>0">
-                                                                                  <div class="col-lg-12" style="margin-top: 20px;">
-                                                                                       <label for="SECTOR">Nombre de la Conferencia/Taller:</label>
-                                                                                       <s:select  cssClass="form-control"   name="res.ID_NOMBRE_EVENTO" id="res.ID_NOMBRE_EVENTO" list="ListaNomEve"  listKey="ID_NOM_EVE"  listValue="DESCRIPCION" headerKey=""  headerValue="--SELECCIONE--" onchange="telquita2();"  />
-                                                                                       <s:iterator value="ListaNomEve" id="ListaNomEve" status="stat">                        
-                                                                                                        <s:hidden  name = "ListaNomEve[%{#stat.index}].ID_NOM_EVE" id="ID_NOM_EVE"></s:hidden>
-                                                                                                        <s:hidden  name = "ListaNomEve[%{#stat.index}].DESCRIPCION" id="DESCRIPCION"></s:hidden>
-                                                                                       </s:iterator>
-                                                                                                      <s:fielderror  fieldName="D2" cssClass="col-lg-12 alert alert-danger" id="quitamen2"></s:fielderror>
-
-                                                                                 </div> 
-                                                                                 </s:if>
-                                                                              
-                                                                                 <div class="col-lg-12" style="margin-top: 20px;">
-                                                                                       <label for="SECTOR">Participante:</label>
-                                                                                 <s:radio list="ListaTipo" listKey="ID_TIPO" listValue="DESCRIPCION"  name="res.ID_TIPO_PARTICIPANTE" onclick= "Javascript:valorotros('tipo');telquita();"  cssStyle="margin-left:15px;" id="TIPO" />
-                                                                                       
-                                                                                       <s:iterator value="ListaTipo" id="ListaTipo" status="stat">                        
-                                                                                                        <s:hidden  name = "ListaTipo[%{#stat.index}].ID_TIPO" id="ID_TIPO"></s:hidden>
-                                                                                                        <s:hidden  name = "ListaTipo[%{#stat.index}].DESCRIPCION" id="DESCRIPCION"></s:hidden>
-                                                                                       </s:iterator>
-                                                                                                  <s:fielderror  fieldName="D3" cssClass="col-lg-12 alert alert-danger" id="quitamen3"></s:fielderror>
-
-                                                                                 </div> 
-                                                                                                  <s:if test="bantipo">       
-                                                                                         <div class="col-lg-12" style="margin-top: 20px;">
-                                                                                      <label  for="EDAD">¿Cúal?:</label>                                                                                       
-                                                                                 <s:textfield  cssClass="form-control" name="res.OTRO_CARGO" id="OTRO" onkeyup=" telquita9();"  ></s:textfield> 
-                                                                                     <s:fielderror  fieldName="D7" cssClass="col-lg-12 alert alert-danger" id="quitamen9"></s:fielderror>
-
-                                                                                </div>          
-                                                                                                  
-                                                                                  </s:if>      
-                                                                                                  
-                                                                                         <s:hidden name="bantipo" value="%{bantipo}"></s:hidden>          
-                                                                                                  
-                                                                                  
-                                                                                                  <div class="col-lg-12" style="margin-top: 20px;">
-                                                                                      <label for="SECTOR">Género:</label>
-                                                                                                  <s:radio label="Genero" name="res.GENERO" list="#{'1':'Hombre','2':'Mujer'}"  onchange="telquita4();" cssStyle="margin-left:15px;"  />   
-                                                                                                       <s:fielderror  fieldName="D4" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
-
-                                                                                 </div>   
-                                                                                 
-                                                                                 <div class="col-lg-12" style="margin-top: 20px;">
-                                                                                      <label  for="EDAD">Edad:</label>                                                                                       
-                                                                                 <s:textfield  cssClass="form-control" name="res.EDAD" id="EDAD" onkeyup="validarSiNumero(this.value); telquita5();"  ></s:textfield> 
-                                                                                     <s:fielderror  fieldName="D5" cssClass="col-lg-12 alert alert-danger" id="quitamen5"></s:fielderror>
-
-                                                                                </div>
-                                                                           
                                                                                
-                                                                            <div class="card-body">
-                                                                                
-                                                                                <div class="col-sm-12">                              
-                                                                                    <div class="row">                                   
-                                                                                        <s:if test="ListaEncabezado.size()>0">
-                                                                                            <table class="table col-lg-12" >
-                                                                                                <s:set var="NoPreg" value="1"/>
-                                                                                                <s:set var="cont" value="0" />
-                                                                                                <s:iterator value="ListaEncabezado" id="ListaEncabezado" status="stat1">
-                                                                                                    
-                                                                                                        <tr >
-                                                                                                            <td class="badge-dark" colspan="2"  >
-                                                                                                                <s:property value="NOM_ENCABEZADO"/>
-                                                                                                                <s:hidden  name = "ListaEncabezado[%{#stat1.index}].ID_ENCABEZADO" id="ID_ENCABEZADO"></s:hidden>
-                                                                                                                <s:hidden  name = "ListaEncabezado[%{#stat1.index}].NOM_ENCABEZADO" id="NOM_ENCABEZADO"></s:hidden>
-                                                                                                            </td>
-                                                                                                        </tr>    
-                                                                                                   
-                                                                                                        <s:iterator value="listaPregEnca" id="listaPregEnca" status="stat2">
-                                                                                                                         
-                                                                                                                        <tr>
-                                                                                                                        <s:hidden  name = "ListaEncabezado[%{#stat1.index}].listaPregEnca[%{#stat2.index}].PREGUNTA" id="PREGUNTA"></s:hidden>
-                                                                                                                        <s:hidden  name = "ListaEncabezado[%{#stat1.index}].listaPregEnca[%{#stat2.index}].ID_PREGUNTA" id="ID_PREGUNTA"></s:hidden>
-                                                                                                                        <s:hidden  name = "ListaEncabezado[%{#stat1.index}].listaPregEnca[%{#stat2.index}].TIPO_PREGUNTA" id="TIPO_PREGUNTA"></s:hidden>
-                                                                                                                        <s:hidden  name = "ListaEncabezado[%{#stat1.index}].listaPregEnca[%{#stat2.index}].ID_ENCABEZADO" id="ID_ENCABEZADO"></s:hidden>
-
-                                                                                                                            
-                                                                                                                                <td>
-                                                                                                                                <s:property value="#NoPreg" />)&nbsp;&nbsp;
-                                                                                                                                <%--<s:property value="#cont" />--%>
-                                                                                                                                <s:property value="PREGUNTA"/><br/>
-                                                                                                                            </td>
-                                                                                                                            <td >
-                                                                                                                                <s:if test="TIPO_PREGUNTA==1">
-                                                                                                                                    <s:select  cssClass="form-control" name="ListaContestados[%{#cont}].ID_RESPUESTA" list="ListaRespuestas1"  listKey="ID_RESPUESTA" listValue="RESPUESTA"  headerKey="" headerValue="-SELECCIONA-"  style=" width:340px"/>
-                                                                                                                                </s:if>
-                                                                                                                                <s:elseif test="TIPO_PREGUNTA==2">
-                                                                                                                                    <s:select  cssClass="form-control" name="ListaContestados[%{#cont}].ID_RESPUESTA" list="ListaRespuestas2"  listKey="ID_RESPUESTA" listValue="RESPUESTA"  headerKey="" headerValue="-SELECCIONA-"  style=" width:340px"/>
-
-                                                                                                                                </s:elseif>
-                                                                                                                                <s:hidden  name = "ListaContestados[%{#cont}].ID_ENCABEZADO" value="%{ID_ENCABEZADO}"></s:hidden>
-                                                                                                                                <s:hidden  name = "ListaContestados[%{#cont}].ID_PREGUNTA" value="%{ID_PREGUNTA}"></s:hidden>
-                                                                                                                                
-                                                                                                                                
-
-
-                                                                                                                                <s:set var="NoPreg" value="%{#NoPreg+1}"/>
-                                                                                                                                <s:set var="cont" value="%{#cont+1}"/> 
-                                                                                                                            </td>
-                                                                                                                        
-                                                                                                                            </tr>
-                                                                                                                             
-                                                                                                                    </s:iterator>                 
-                                                                                                                        
-                                                                                                                
-                                                                                                                            
-                                                                                                                                         
-                                                                                                                            
-                                                                                                    <s:set var="NoPreg" value="1"/>
-                                                                                                </s:iterator>
-                                                                                            </table>
-                                                                                                <s:fielderror  fieldName="ERRORPREG2" cssClass="col-lg-12 alert alert-danger"></s:fielderror> 
-                                                                                                
-                                                                                                
-                                                                                        </s:if>
+                                                                               
+                                                                               <s:if test="banMateriales">     
+                                                                               
+                                                                                <div class="col-md-12">
+                                                                <div class="card">
+                                                                    <div class="card-header card-header-rose card-header-icon">
+                                                                        <div class="card-icon">
+                                                                            <i class="material-icons">assignment</i>
+                                                                        </div>
+                                                                        <h4 class="card-title">Materiales</h4>
+                                                                    </div>
+                                                                    <div class="card-body">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-shopping">
+                                                                                <thead>
+                                                                                    <tr>
+                                                                                        <th class="text-center"></th>
+                                                                                        <th>Materiales</th>
+                                                                                        <th class="th-description">Versión</th>
+                                                                                        
+                                                                                        <th></th>
+                                                                                    </tr>
+                                                                                </thead>
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td align="center">
+                                                                                            <div class="img-container">
+                                                                                                <a href="material/material1.pdf" target="_blank"> <img src="assets/img/pdf-icon.png" alt="..." style="width: 50%;"/></a>
+                                                                                            </div>
+                                                                                        </td>
+                                                                                        <td class="td-name">
+                                                                                            <a href="material/material1.pdf" target="_blank">Ejemplo de material a descargar</a>
+                                                                                            <br>
+                                                                                                <small>Descripción</small>
+                                                                                        </td>
+                                                                                        <td>
+                                                                                            Versión 1.0
+                                                                                        </td>
+                                                                                       
+                                                                                    </tr>
                                                                                     
-                                                                                    <s:iterator value="ListaRespuestas1" id="ListaRespuestas1" status="stat1">                        
-                                                                                        <s:hidden  name = "ListaRespuestas1[%{#stat1.index}].ID_RESPUESTA" id="ID_RESPUESTA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaRespuestas1[%{#stat1.index}].RESPUESTA" id="RESPUESTA"></s:hidden>
-                                                                                    </s:iterator>  
-                                                                                    <s:iterator value="ListaRespuestas2" id="ListaRespuestas2" status="stat1">                        
-                                                                                        <s:hidden  name = "ListaRespuestas2[%{#stat1.index}].ID_RESPUESTA" id="ID_RESPUESTA"></s:hidden>
-                                                                                        <s:hidden  name = "ListaRespuestas2[%{#stat1.index}].RESPUESTA" id="RESPUESTA"></s:hidden>
-                                                                                    </s:iterator>  
-
-
-
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>            
+                                                            
+                                                                        </s:if>    
+                                                                               
+                                                                                <s:hidden name="banMateriales" id="%{banMateriales}"></s:hidden>
                                                                                     
-                                                                                </div>  
-                                                                             
-                                                                                <div class=" col-md-12 text-center">
-                                                                                    <a class="btn btn-round btn-rose"  href="Javascript:GuardaEvaluacion('GuardaEvaluacion')">Guardar e imprimir constancia</a>
-                                                                                </div> 
-                                                                                    <div style="width: 100%; color:red; text-align: center; margin-top: 10px;">
-                                                                                    <s:fielderror  fieldName="D6" ></s:fielderror> 
-                                                                                    </div>  
-                                                                                    
-                                                                                    
-                                                                            </div>      
-                                                                                
-                                                                                
-                                                                            </div>
-                                                                           
-                                                                        </s:if>
-                                                                                    
+                                                                                 
                                                                                     
                                                                                     
                                                                                     
                                                                             
                                                                             </div>
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
+                                                                               
                                                                             <!-- end content-->
                                                                         </div>
                                                                         <!--  end card  -->

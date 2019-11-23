@@ -65,6 +65,8 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
     private List<RespuestaBean> ListaRespuestas1 = new ArrayList<RespuestaBean>();
     private List<RespuestaBean> ListaRespuestas2 = new ArrayList<RespuestaBean>();
     private List<Res_ConBean> ListaContestados = new ArrayList<Res_ConBean>();
+    
+    private List<Res_ConBean> ListaRegEncuestados = new ArrayList<Res_ConBean>();
 
     Res_ConBean res = new Res_ConBean();
 
@@ -75,6 +77,9 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
     String registrado="";
     boolean ocultaboton =false;
       boolean muestraboton =true;
+      boolean bantipo=false;
+      boolean banConstancia=false;
+      boolean banMateriales=false;
     
     
 
@@ -104,11 +109,30 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
             EvaluarDAOImpl con = new EvaluarDAOImpl();
             
             registrado=con.ConsultaRegistro(res);
-            System.out.println("el folio es "+ registrado);
+           
+            
+            ListaRegEncuestados=con.ConsultaRegEnc(res);
+            boolean contesto=false;
+            
+            for (int i = 0; i <ListaRegEncuestados.size() ; i++) {
+                
+               if(ListaRegEncuestados.get(i).getENCUESTAS().equals("1")) {
+                contesto=true;
+            }
+               else{
+                   contesto=false;
+               }
+                
+            }
+            
+            
+            
             ocultaboton=false;
             muestraboton=true;
             
-            if(registrado.length()==0){
+            if(ListaRegEncuestados.size()>0){
+            
+            if(!contesto){
                 
                    ListaEvento=con.ConsultaEventos();
            ListaTipo=con.ConsultaTipos();
@@ -131,9 +155,66 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                 muestraboton=true;
                 ocultaboton=false;
                banMuestraForm = false;  
+               banConstancia=true;
                 
             }
+            }
+            else{
+                
+                res.setFOLIO("");
+                
+                 addFieldError("ERRORFOLIO", "Folio no encontrado favor de verificarlo");
+            }
             
+
+         
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+    
+      public String MuestraMateriales() {
+
+       /* //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }*/
+
+        try {
+
+            EvaluarDAOImpl con = new EvaluarDAOImpl();
+            
+            registrado=con.ConsultaRegistro(res);
+           
+            
+            ListaRegEncuestados=con.ConsultaRegEnc(res);
+            
+            if(ListaRegEncuestados.size()>0){
+                
+                banMateriales=true;
+            }
+            else
+            {
+                
+                 addFieldError("ERRORFOLIO", "Folio no encontrado favor de verificarlo");
+                
+                banMateriales=false;
+            }
+          
 
          
             return "SUCCESS";
@@ -167,6 +248,81 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
             EvaluarDAOImpl con = new EvaluarDAOImpl();
 
            ListaNomEve=con.ConsultaNomEvento(res.getID_EVENTO());
+            
+            
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+    
+     public String materiales2() {
+
+       /* //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }*/
+
+        try {
+
+            EvaluarDAOImpl con = new EvaluarDAOImpl();
+
+          
+            
+            
+
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+    
+     public String tipo() {
+
+       /* //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }*/
+
+        try {
+
+            EvaluarDAOImpl con = new EvaluarDAOImpl();
+
+          if(res.getID_TIPO_PARTICIPANTE().equals("4")){
+              
+              bantipo=true;
+              
+          }
+          else{
+              bantipo=false;
+          }
             
             
 
@@ -277,15 +433,58 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
             }
             System.out.println("id_participante" + res.getID_TIPO_PARTICIPANTE());
             
+           
+            
             if(res.getID_EVENTO().length()>0 && res.getID_NOMBRE_EVENTO().length()>0 && res.getID_TIPO_PARTICIPANTE()!=null && res.getGENERO()!=null && res.getEDAD().length()>0){
                 
-                System.out.println("estan llenos todos ");
-                datos=true;
+               
+                if(res.getID_TIPO_PARTICIPANTE().equals("4")){
+                    
+                    if(res.getOTRO_CARGO().length()>0){
+                        datos=true;
+                    }
+                    else{
+                         if(res.getID_EVENTO().length()==0){
+                   
+                  addFieldError("D1", "Compo requerido");  
+               } 
+                 if(res.getID_NOMBRE_EVENTO().length()==0){
+                   
+                  addFieldError("D2", "Compo requerido");  
+               } 
+                  if(res.getID_TIPO_PARTICIPANTE()==null ){
+                   
+                  addFieldError("D3", "Compo requerido");  
+               } 
+                   if(res.getGENERO()==null){
+                   
+                  addFieldError("D4", "Compo requerido");  
+               } 
+                    if(res.getEDAD().length()==0){
+                   
+                  addFieldError("D5", "Compo requerido");  
+               } 
+                 if(res.getOTRO_CARGO().length()==0){
+                   
+                  addFieldError("D7", "Compo requerido");  
+               } 
+                        
+                        datos=false;
+                    }
+                    
+                }
+                else{
+                    res.setOTRO_CARGO("NO");
+                     datos=true;
+                }
+                
+                
+               
                 
             }
             else{
                 
-                 System.out.println("no estan llenos todos ");
+                
                
                if(res.getID_EVENTO().length()==0){
                    
@@ -307,6 +506,14 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                    
                   addFieldError("D5", "Compo requerido");  
                } 
+                    if(res.getID_TIPO_PARTICIPANTE().equals("4")){
+                        
+                        if(res.getOTRO_CARGO().length()==0){
+                   
+                  addFieldError("D7", "Compo requerido");  
+               } 
+                        
+                    }
                 
                 
             }
@@ -357,9 +564,13 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                 res.setID_TIPO_PARTICIPANTE("");
                 res.setGENERO("");
                 res.setEDAD("");
+                res.setOTRO_CARGO("");
+                bantipo=false;
                 
                 banMuestraForm = false;
                  addFieldError("SEGUARDO", "¡La encuesta se guardo con éxito, gracias!");
+                 
+                 banConstancia=true;
 
             }
             
@@ -806,6 +1017,38 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
 
     public static void setLOG(Logger LOG) {
         ActionSupport.LOG = LOG;
+    }
+
+    public List<Res_ConBean> getListaRegEncuestados() {
+        return ListaRegEncuestados;
+    }
+
+    public void setListaRegEncuestados(List<Res_ConBean> ListaRegEncuestados) {
+        this.ListaRegEncuestados = ListaRegEncuestados;
+    }
+
+    public boolean isBantipo() {
+        return bantipo;
+    }
+
+    public void setBantipo(boolean bantipo) {
+        this.bantipo = bantipo;
+    }
+
+    public boolean isBanConstancia() {
+        return banConstancia;
+    }
+
+    public void setBanConstancia(boolean banConstancia) {
+        this.banConstancia = banConstancia;
+    }
+
+    public boolean isBanMateriales() {
+        return banMateriales;
+    }
+
+    public void setBanMateriales(boolean banMateriales) {
+        this.banMateriales = banMateriales;
     }
     
     

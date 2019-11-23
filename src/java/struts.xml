@@ -39,6 +39,28 @@
             <result name="input">/pages/index.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
         </action>
+         <action name="tipo" class="action.Evaluacion_Action" method="tipo">
+            <result name="SUCCESS">/pages/index.jsp</result>			              
+            <result name="ERROR">/pages/index.jsp</result>
+            <result name="input">/pages/index.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+         <action name="materiales" class="action.Evaluacion_Action" method="materiales2">
+            <result name="SUCCESS">/pages/materiales.jsp</result>			              
+            <result name="ERROR">/pages/materiales.jsp</result>
+            <result name="input">/pages/materiales.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        <action name="MuestraMateriales" class="action.Evaluacion_Action" method="MuestraMateriales">
+            <result name="SUCCESS">/pages/materiales.jsp</result>			              
+            <result name="ERROR">/pages/materiales.jsp</result>
+            <result name="input">/pages/materiales.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
+        
         
         <action name="ConsultaNomEvento" class="action.Evaluacion_Action" method="ConsultaNomEvento">
             <result name="SUCCESS">/pages/index.jsp</result>			              

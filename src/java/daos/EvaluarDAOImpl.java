@@ -27,6 +27,7 @@ import mappers.EventoMapper;
 import mappers.NombreEventoMapper;
 import mappers.RespuestasMapper;
 import mappers.TipoMapper;
+import mappers.regEncMapper;
 
 
 import utilidades.Constantes;
@@ -64,6 +65,13 @@ public class EvaluarDAOImpl {
         Constantes.enviaMensajeConsola("Consulta eventos----->" + query);
         List list = null;
         list = oraDaoFac.queryForList(query, new EventoMapper());
+        return list;
+    }
+     public List ConsultaRegEnc(Res_ConBean res) throws Exception {
+        String query = "SELECT FOLIO, ENCUENSTAS AS ENCUESTAS FROM tbl_datos_generales WHERE FOLIO='"+res.getFOLIO()+"'";
+        Constantes.enviaMensajeConsola("Consulta eventos----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new regEncMapper());
         return list;
     }
     
@@ -221,8 +229,7 @@ public class EvaluarDAOImpl {
 
 //En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
         
-        temporal = new ObjPrepareStatement("FOLIO", "STRING", res.getFOLIO());
-        arregloCampos.add(temporal);
+        
         temporal = new ObjPrepareStatement("ID_NOM_EVE", "STRING", res.getID_NOMBRE_EVENTO());
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("ID_TIPO", "STRING", res.getID_TIPO_PARTICIPANTE());
@@ -231,11 +238,16 @@ public class EvaluarDAOImpl {
         arregloCampos.add(temporal);
         temporal = new ObjPrepareStatement("EDAD", "STRING", res.getEDAD());
         arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("OTRO_CARGO", "STRING", res.getOTRO_CARGO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ENCUENSTAS", "STRING", "1");
+        arregloCampos.add(temporal);
         
+        String Condicion="where FOLIO='"+res.getFOLIO()+"'  ";
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
-        return oraDaoFac.queryInsert("TBL_DATOS_GENERALES", arregloCampos);
+         return oraDaoFac.queryUpdate("TBL_DATOS_GENERALES", arregloCampos, Condicion);
     }
     
     public boolean GuardaEvaluacion(Connection conn, PreparedStatement stat,Res_ConBean res) throws Exception {

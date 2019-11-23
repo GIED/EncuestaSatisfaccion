@@ -23,7 +23,30 @@ public class Res_ConBean {
     private String ID_RESPUESTA;
     private String RESPUESTA;
     private String FEC_REG;
+    private String ENCUESTAS;
+    private String OTRO_CARGO;
+    
+    
 
+    public String getOTRO_CARGO() {
+        return OTRO_CARGO;
+    }
+
+    public void setOTRO_CARGO(String OTRO_CARGO) {
+        this.OTRO_CARGO = OTRO_CARGO;
+    }
+    
+
+    public String getENCUESTAS() {
+        return ENCUESTAS;
+    }
+
+    public void setENCUESTAS(String ENCUESTAS) {
+        this.ENCUESTAS = ENCUESTAS;
+    }
+
+    
+    
     public String getID_DATO() {
         return ID_DATO;
     }
