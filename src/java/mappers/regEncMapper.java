@@ -30,6 +30,11 @@ public class regEncMapper implements Mapper{
         } else {
             dat.setENCUESTAS(rs.getString("ENCUESTAS"));
         }
+        if (rs.getString("NOMBRE_COMPLETO") != null) {
+            dat.setNOMBRE_COMPLETO(rs.getString("NOMBRE_COMPLETO").trim());
+        } else {
+            dat.setNOMBRE_COMPLETO(rs.getString("NOMBRE_COMPLETO"));
+        }
         
          
         return dat;

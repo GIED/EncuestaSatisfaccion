@@ -109,12 +109,20 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
             EvaluarDAOImpl con = new EvaluarDAOImpl();
             
             registrado=con.ConsultaRegistro(res);
+            
+          
+            
+            res.setRUTAIMAGENES(Constantes.rutaImages);
+            res.setFOLIO(res.getFOLIO().toUpperCase());
            
             
             ListaRegEncuestados=con.ConsultaRegEnc(res);
             boolean contesto=false;
             
             for (int i = 0; i <ListaRegEncuestados.size() ; i++) {
+                
+                res.setNOMBRE_COMPLETO(ListaRegEncuestados.get(i).getNOMBRE_COMPLETO());
+                
                 
                if(ListaRegEncuestados.get(i).getENCUESTAS().equals("1")) {
                 contesto=true;
@@ -558,7 +566,7 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                 //cerrando conexiones...
                 cierraConexiones();
                 ListaContestados.clear();
-                res.setFOLIO("");
+               
                 res.setID_EVENTO("");
                 res.setID_NOMBRE_EVENTO("");
                 res.setID_TIPO_PARTICIPANTE("");

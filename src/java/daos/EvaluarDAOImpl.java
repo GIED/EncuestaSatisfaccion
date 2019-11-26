@@ -68,7 +68,7 @@ public class EvaluarDAOImpl {
         return list;
     }
      public List ConsultaRegEnc(Res_ConBean res) throws Exception {
-        String query = "SELECT FOLIO, ENCUENSTAS AS ENCUESTAS FROM tbl_datos_generales WHERE FOLIO='"+res.getFOLIO()+"'";
+        String query = "SELECT FOLIO, ENCUENSTAS AS ENCUESTAS,NOMBRES||' '||APATERNO||' '||AMATERNO AS NOMBRE_COMPLETO FROM tbl_datos_generales WHERE FOLIO='"+res.getFOLIO()+"'";
         Constantes.enviaMensajeConsola("Consulta eventos----->" + query);
         List list = null;
         list = oraDaoFac.queryForList(query, new regEncMapper());

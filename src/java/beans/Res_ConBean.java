@@ -25,9 +25,28 @@ public class Res_ConBean {
     private String FEC_REG;
     private String ENCUESTAS;
     private String OTRO_CARGO;
+    private String NOMBRE_COMPLETO;
+    private String RUTAIMAGENES;
+
+    public String getRUTAIMAGENES() {
+        return RUTAIMAGENES;
+    }
+
+    public void setRUTAIMAGENES(String RUTAIMAGENES) {
+        this.RUTAIMAGENES = RUTAIMAGENES;
+    }
     
     
 
+    public String getNOMBRE_COMPLETO() {
+        return NOMBRE_COMPLETO;
+    }
+
+    public void setNOMBRE_COMPLETO(String NOMBRE_COMPLETO) {
+        this.NOMBRE_COMPLETO = NOMBRE_COMPLETO;
+    }
+    
+    
     public String getOTRO_CARGO() {
         return OTRO_CARGO;
     }

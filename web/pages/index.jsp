@@ -299,15 +299,32 @@ function ConsultaNomEvento(accion) {
                                                                                         <a class="btn btn-round btn-rose"  href="Javascript:IniciaEvaluacion('MuestraForm')">Consultar Folio</a>
                                                                                     </div>
                                                                              </div>
-                                                                               <s:fielderror  fieldName="SEGUARDO" cssClass="col-lg-12 alert alert-success" cssStyle="margin-top:20px;"></s:fielderror>
+                                                                               <s:fielderror  fieldName="SEGUARDO" cssClass="col-lg-12 alert alert-success" cssStyle="margin-top:10px;"></s:fielderror>
                                                                              
-                                                                               <s:if test="banConstancia">
+                                                                               <s:if test="banConstancia"> 
+                                                                                   
+                                                                                   <s:url action="GeneraPdf" id="myUrl"  escapeAmp="false" namespace="/">
+
+                                                                                         <s:param name="TipoReporte" value="'const.jasper'"/>
+                                                                                         <s:param name="FOLIO" value="res.FOLIO"/>
+                                                                                          <s:param name="RUTAIMAGEN" value="res.RUTAIMAGENES"/>
+                                                                                         <s:param name="esExcel" value="'false'"/>
+                                                                                         <s:param name="esPDF" value="'true'"/>            
+
+                                                                                    </s:url> 
                                                                                    
                                                                                    <div style="width: 50%; margin: auto; text-align: center;">
-                                                                                       <a href="constancia/conatncia.pdf" target="_blank">
+                                                                                       <a  href="<s:property value="myUrl"/>" target="_blank">
                                                                                                
                                                                                                <img src="assets/img/pdf-icon.png" alt="" style="max-width: 100px;"/></a>
                                                                                    </div>
+                                                                                   
+                                                                                    
+                                                                                   
+                                                                                   
+                                                                                   
+                                                                                   
+                                                                                   
                                                                                    <div style="width: 50%; margin: auto; text-align: center;">
                                                                                           Descargar constancia
                                                                                    </div>
@@ -320,6 +337,12 @@ function ConsultaNomEvento(accion) {
                                                                                     
                                                                                     <s:if test="banMuestraForm">
                                                                             <s:hidden name="banMuestraForm" id="%{banMuestraForm}"></s:hidden>
+                                                                             <s:hidden name="res.NOMBRE_COMPLETO" id="%{res.NOMBRE_COMPLETO}"></s:hidden>
+                                                                               <s:hidden name="res.RUTAIMAGENES" id="%{res.RUTAIMAGENES}"></s:hidden>
+                                                                            
+                                                                                <div style="width: 100%; text-align: center;  margin-bottom: 5px; ">Nombre del participante </div>
+                                                                                
+                                                                                <div style="color: purple; width: 100%; text-align: center; margin-bottom: 10px;"> <s:property value="res.NOMBRE_COMPLETO"></s:property></div>
                                                                             
                                                                             <div style="padding: 10px; color:white; text-align: center; background: purple; min-height: 30px; max-height: 50px; border-radius: 20px; box-shadow: 1px 1px 3px #000;">
                                                                                     Estimado usuario, gracias a su colaboración podremos mejorar en próximos foros aquellos aspectos que usted nos haga constar
