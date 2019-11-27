@@ -80,12 +80,79 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
       boolean bantipo=false;
       boolean banConstancia=false;
       boolean banMateriales=false;
+      boolean banfolio=false;
+      boolean bannombres=false;
+      boolean tipoacceso=true;
     
     
 
     //******************** PARA OBJETO DE NAVEGACIoN ***********************************************
     private Map session;
 
+    
+    
+     public String elegirAcceso() {
+
+       /* //validando session***********************************************************************
+        if (session.get("cveUsuario") != null) {
+            String sUsu = (String) session.get("cveUsuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }
+        if (session.containsKey("usuario")) {
+            usuariocons = (usuarioBean) session.get("usuario");
+        } else {
+            addActionError("**** La sesión ha expirado *** favor de iniciar una nueva sesion *** ");
+            return "SESSION";
+        }*/
+
+        try {
+
+            EvaluarDAOImpl con = new EvaluarDAOImpl();
+            
+            if(res.getTIPO().equals("1")){
+                banfolio=true;
+                bannombres=false;
+                
+                
+            }
+           
+            if(res.getTIPO().equals("2")){
+                banfolio=false;
+                bannombres=true;
+                
+            }
+            
+        
+            
+
+         
+            return "SUCCESS";
+
+        } catch (Exception e) {
+
+            TipoException = e.getMessage();
+            return "ERROR";
+        }
+
+    }
+     
+     
+     public static String remove1(String input) {
+    // Cadena de caracteres original a sustituir.
+    String original = "áàäéèëíìïóòöúùuÁÀÄÉÈËÍÌÏÓÒÖÚÙÜçÇ";
+    // Cadena de caracteres ASCII que reemplazarán los originales.
+    String ascii = "aaaeeeiiiooouuuAAAEEEIIIOOOUUUcC";
+    String output = input;
+    for (int i=0; i<original.length(); i++) {
+        // Reemplazamos los caracteres especiales.
+        output = output.replace(original.charAt(i), ascii.charAt(i));
+    }//for i
+    return output;
+}
+    
+    
     
 
     public String MuestraFormEvaluaion() {
@@ -108,20 +175,141 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
 
             EvaluarDAOImpl con = new EvaluarDAOImpl();
             
+             
+            res.setRUTAIMAGENES(Constantes.rutaImages);
+         
+            
+            if(res.getTIPO().equals("1")){
+                
+                   res.setFOLIO(res.getFOLIO().toUpperCase());
+                
+                
+                 ListaRegEncuestados=con.ConsultaRegEnc(res);
+                
+                
+                
+                
+            }
+            
+            
+            
+              if(res.getTIPO().equals("2")){
+                  
+                  
+                 boolean nombre=false;
+                  boolean amaterno=false;
+                    boolean apaterno=false;
+                    
+                    
+                if(res.getNOMBRE().length()>0){
+                    
+                    
+                    res.setNOMBRE(res.getNOMBRE().toUpperCase());
+                    
+                   res.setNOMBRE(remove1(res.getNOMBRE()));
+                    
+                    
+                    nombre=true;
+                }   
+                else{
+                    addFieldError("ERRORNOMBRE", "Campo requerido");
+                    nombre=false;
+                    
+                }
+                    
+                    if(res.getAMATERNO().length()>0){
+                        res.setAMATERNO(res.getAMATERNO().toUpperCase());
+                        
+                        res.setAMATERNO(remove1(res.getAMATERNO())); 
+                    
+                    amaterno=true;
+                }   
+                else{
+                         addFieldError("ERRORAM", "Campo requerido");
+                    amaterno=false;
+                    
+                }   
+                    
+                   if(res.getAPATERNO().length()>0){
+                       res.setAPATERNO(res.getAPATERNO().toUpperCase());
+                    res.setAPATERNO(remove1(res.getAPATERNO())); 
+                    apaterno=true;
+                }   
+                else{
+                       addFieldError("ERRORAP", "Campo requerido");
+                    apaterno=false;
+                    
+                }      
+                    
+                  
+              if(nombre && amaterno && apaterno )    {
+                  
+            
+                  
+                ListaRegEncuestados=con.ConsultaRegEncNombre(res);
+                
+               if(ListaRegEncuestados.size()>0){
+                   
+                   bannombres=false;
+                   
+               }
+               else{
+                   
+                    addFieldError("ERRORNONOMBRE", "No se encontro información del participante");
+                   
+                   return "ERROR";
+                   
+               }
+                
+                
+                
+                
+                
+                  }
+              else{
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  return "ERROR";
+              }
+                  
+                  
+                  
+                  
+                  
+                  
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             registrado=con.ConsultaRegistro(res);
             
           
-            
-            res.setRUTAIMAGENES(Constantes.rutaImages);
-            res.setFOLIO(res.getFOLIO().toUpperCase());
+           
            
             
-            ListaRegEncuestados=con.ConsultaRegEnc(res);
+         
             boolean contesto=false;
             
             for (int i = 0; i <ListaRegEncuestados.size() ; i++) {
                 
                 res.setNOMBRE_COMPLETO(ListaRegEncuestados.get(i).getNOMBRE_COMPLETO());
+                res.setID_DATO(ListaRegEncuestados.get(i).getID_DATO());
                 
                 
                if(ListaRegEncuestados.get(i).getENCUESTAS().equals("1")) {
@@ -541,9 +729,17 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                 //Constantes.enviaMensajeConsola("ID que llega: "+ue.getID_IE_UE());
                 Constantes.enviaMensajeConsola("ListaContestados: " + ListaContestados.size());
                 
-                con.GuardaDatos(res);
                 
-                res.setID_DATO(con.ConsultaIdDato(res.getFOLIO()));
+                
+                if(res.getTIPO().equals("1")){
+                     con.GuardaDatos(res);
+                }
+               
+                  if(res.getTIPO().equals("2")){
+                     con.GuardaDatosId(res);
+                }
+                  
+             
 
                 for (int i = 0; i < ListaContestados.size(); i++) {
 
@@ -573,7 +769,11 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
                 res.setGENERO("");
                 res.setEDAD("");
                 res.setOTRO_CARGO("");
+                res.setTIPO("");
                 bantipo=false;
+               
+                banfolio=false;
+                bannombres=false;
                 
                 banMuestraForm = false;
                  addFieldError("SEGUARDO", "¡La encuesta se guardo con éxito, gracias!");
@@ -1057,6 +1257,30 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
 
     public void setBanMateriales(boolean banMateriales) {
         this.banMateriales = banMateriales;
+    }
+
+    public boolean isBanfolio() {
+        return banfolio;
+    }
+
+    public void setBanfolio(boolean banfolio) {
+        this.banfolio = banfolio;
+    }
+
+    public boolean isBannombres() {
+        return bannombres;
+    }
+
+    public void setBannombres(boolean bannombres) {
+        this.bannombres = bannombres;
+    }
+
+    public boolean isTipoacceso() {
+        return tipoacceso;
+    }
+
+    public void setTipoacceso(boolean tipoacceso) {
+        this.tipoacceso = tipoacceso;
     }
     
     

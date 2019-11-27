@@ -68,7 +68,15 @@ public class EvaluarDAOImpl {
         return list;
     }
      public List ConsultaRegEnc(Res_ConBean res) throws Exception {
-        String query = "SELECT FOLIO, ENCUENSTAS AS ENCUESTAS,NOMBRES||' '||APATERNO||' '||AMATERNO AS NOMBRE_COMPLETO FROM tbl_datos_generales WHERE FOLIO='"+res.getFOLIO()+"'";
+        String query = "SELECT FOLIO, ENCUENSTAS AS ENCUESTAS,NOMBRES||' '||APATERNO||' '||AMATERNO AS NOMBRE_COMPLETO, ID_DATO FROM tbl_datos_generales WHERE FOLIO='"+res.getFOLIO()+"'";
+        Constantes.enviaMensajeConsola("Consulta eventos----->" + query);
+        List list = null;
+        list = oraDaoFac.queryForList(query, new regEncMapper());
+        return list;
+    }
+     
+      public List ConsultaRegEncNombre(Res_ConBean res) throws Exception {
+        String query = "SELECT FOLIO, ENCUENSTAS AS ENCUESTAS,NOMBRES||' '||APATERNO||' '||AMATERNO AS NOMBRE_COMPLETO, ID_DATO FROM (SELECT ID_DATO,  FOLIO,  ID_NOM_EVE,  ID_TIPO,  ID_GENERO,  FECREG,  EDAD,  CURP,  translate(NOMBRES, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')AS NOMBRES,  translate(APATERNO, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')AS  APATERNO,  translate(AMATERNO, 'áéíóúÁÉÍÓÚ', 'aeiouAEIOU')AS  AMATERNO,  ENCUENSTAS,  OTRO_CARGO FROM TBL_DATOS_GENERALES) WHERE NOMBRES='"+res.getNOMBRE()+"' AND APATERNO='"+res.getAPATERNO()+"' AND AMATERNO='"+res.getAMATERNO()+"'";
         Constantes.enviaMensajeConsola("Consulta eventos----->" + query);
         List list = null;
         list = oraDaoFac.queryForList(query, new regEncMapper());
@@ -244,6 +252,37 @@ public class EvaluarDAOImpl {
         arregloCampos.add(temporal);
         
         String Condicion="where FOLIO='"+res.getFOLIO()+"'  ";
+
+//Se terminan de adicionar a nuesto ArrayLis los objetos
+//Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara
+         return oraDaoFac.queryUpdate("TBL_DATOS_GENERALES", arregloCampos, Condicion);
+    }
+     public boolean GuardaDatosId(Res_ConBean res) throws Exception {
+
+//Crear un ArrayList para agregar los campos a insertar
+        ArrayList<ObjPrepareStatement> arregloCampos = new ArrayList<ObjPrepareStatement>();
+//Crear un objeto de tipo ObjPrepareStatement
+        ObjPrepareStatement temporal;
+//imprimiendo los valores del objeto tipo CCT...........
+        Constantes.enviaMensajeConsola("Entre al DAO del INSERT...................................");
+
+//En el objeto temporal settear el campo de la tabla, el tipo de dato y el valor a insertar
+        
+        
+        temporal = new ObjPrepareStatement("ID_NOM_EVE", "STRING", res.getID_NOMBRE_EVENTO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_TIPO", "STRING", res.getID_TIPO_PARTICIPANTE());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ID_GENERO", "STRING", res.getGENERO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("EDAD", "STRING", res.getEDAD());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("OTRO_CARGO", "STRING", res.getOTRO_CARGO());
+        arregloCampos.add(temporal);
+        temporal = new ObjPrepareStatement("ENCUENSTAS", "STRING", "1");
+        arregloCampos.add(temporal);
+        
+        String Condicion="where ID_DATO='"+res.getID_DATO()+"'  ";
 
 //Se terminan de adicionar a nuesto ArrayLis los objetos
 //Ejecutar la funcion del OracleDAOFactory queryInsert, se deber pasar como parmetros la tabla en donde se insertara

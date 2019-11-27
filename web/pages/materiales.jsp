@@ -333,13 +333,13 @@ function ConsultaNomEvento(accion) {
                                                                                     <tr>
                                                                                         <td align="center">
                                                                                             <div class="img-container">
-                                                                                                <a href="material/material1.pdf" target="_blank"> <img src="assets/img/pdf-icon.png" alt="..." style="width: 50%;"/></a>
+                                                                                                <a href="https://educacionedomex-my.sharepoint.com/:u:/g/personal/pedro_fabela_edugem_gob_mx/EUwrx3TvlWxJk1uDGdjJxtYBtGUs0R0cIWRmoEih7Eia6w?e=OSxCyl" target="_blank"> <img src="assets/img/pdf-icon.png" alt="..." style="width: 50%;"/></a>
                                                                                             </div>
                                                                                         </td>
                                                                                         <td class="td-name">
-                                                                                            <a href="material/material1.pdf" target="_blank">Ejemplo de material a descargar</a>
+                                                                                            <a href="https://educacionedomex-my.sharepoint.com/:u:/g/personal/pedro_fabela_edugem_gob_mx/EUwrx3TvlWxJk1uDGdjJxtYBtGUs0R0cIWRmoEih7Eia6w?e=OSxCyl" target="_blank">Materiales Foro 2019</a>
                                                                                             <br>
-                                                                                                <small>Descripción</small>
+                                                                                                <small>Materiales del Foro</small>
                                                                                         </td>
                                                                                         <td>
                                                                                             Versión 1.0

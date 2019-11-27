@@ -40,6 +40,14 @@
             <result name="input">/pages/index.jsp</result>
             <result name="SESSION" type="chain">CerrarSesion</result>
         </action>
+        
+           <action name="elegirAcceso" class="action.Evaluacion_Action" method="elegirAcceso">
+            <result name="SUCCESS">/pages/index.jsp</result>			              
+            <result name="ERROR">/pages/index.jsp</result>
+            <result name="input">/pages/index.jsp</result>
+            <result name="SESSION" type="chain">CerrarSesion</result>
+        </action>
+        
          <action name="tipo" class="action.Evaluacion_Action" method="tipo">
             <result name="SUCCESS">/pages/index.jsp</result>			              
             <result name="ERROR">/pages/index.jsp</result>

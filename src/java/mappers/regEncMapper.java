@@ -35,7 +35,11 @@ public class regEncMapper implements Mapper{
         } else {
             dat.setNOMBRE_COMPLETO(rs.getString("NOMBRE_COMPLETO"));
         }
-        
+         if (rs.getString("ID_DATO") != null) {
+            dat.setID_DATO(rs.getString("ID_DATO").trim());
+        } else {
+            dat.setID_DATO(rs.getString("ID_DATO"));
+        }
          
         return dat;
     }

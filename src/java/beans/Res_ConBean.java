@@ -27,6 +27,52 @@ public class Res_ConBean {
     private String OTRO_CARGO;
     private String NOMBRE_COMPLETO;
     private String RUTAIMAGENES;
+    private String TIPO;
+    private String NOMBRE;
+    private String APATERNO;
+    private String AMATERNO;
+
+     
+     
+    
+    
+
+    public String getNOMBRE() {
+        return NOMBRE;
+    }
+
+    public void setNOMBRE(String NOMBRE) {
+        this.NOMBRE = NOMBRE;
+    }
+
+    public String getAPATERNO() {
+        return APATERNO;
+    }
+
+    public void setAPATERNO(String APATERNO) {
+        this.APATERNO = APATERNO;
+    }
+
+    public String getAMATERNO() {
+        return AMATERNO;
+    }
+
+    public void setAMATERNO(String AMATERNO) {
+        this.AMATERNO = AMATERNO;
+    }
+    
+    
+
+    public String getTIPO() {
+        return TIPO;
+    }
+
+    public void setTIPO(String TIPO) {
+        this.TIPO = TIPO;
+    }
+    
+    
+    
 
     public String getRUTAIMAGENES() {
         return RUTAIMAGENES;

@@ -23,7 +23,7 @@ public class Constantes implements Serializable {
 		
 		
 	 
-		/*/******************* Desarrollo*******************************************************
+		//******************* Desarrollo*******************************************************
       
 		public static final boolean esDesarrollo = true;		
 		public static final String rutaProyectos =   "http://aplicaciones.edugem.gob.mx/";
@@ -34,7 +34,7 @@ public class Constantes implements Serializable {
 		public static final String rutaManuales = "http://aplicaciones.edugem.gob.mx/manuales/ManualUsuario3P.pdf";		
 		//*/
                 
-                //******************* producción*******************************************************
+                /*/******************* producción*******************************************************
       
 		public static final boolean esDesarrollo = true;		
 		public static final String rutaProyectos =   "http://aplicaciones.edugem.gob.mx/";
