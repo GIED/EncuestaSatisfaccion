@@ -395,9 +395,100 @@ public class Evaluacion_Action extends ActionSupport implements SessionAware {
             EvaluarDAOImpl con = new EvaluarDAOImpl();
             
             registrado=con.ConsultaRegistro(res);
+            
+            
+              if(res.getTIPO().equals("1")){
+                
+                   res.setFOLIO(res.getFOLIO().toUpperCase());
+                
+                
+                 ListaRegEncuestados=con.ConsultaRegEnc(res);
+                
+                
+                
+                
+            }
+            
+            
+            
+              if(res.getTIPO().equals("2")){
+                  
+                  
+                 boolean nombre=false;
+                  boolean amaterno=false;
+                    boolean apaterno=false;
+                    
+                    
+                if(res.getNOMBRE().length()>0){
+                    
+                    
+                    res.setNOMBRE(res.getNOMBRE().toUpperCase());
+                    
+                   res.setNOMBRE(remove1(res.getNOMBRE()));
+                    
+                    
+                    nombre=true;
+                }   
+                else{
+                    addFieldError("ERRORNOMBRE", "Campo requerido");
+                    nombre=false;
+                    
+                }
+                    
+                    if(res.getAMATERNO().length()>0){
+                        res.setAMATERNO(res.getAMATERNO().toUpperCase());
+                        
+                        res.setAMATERNO(remove1(res.getAMATERNO())); 
+                    
+                    amaterno=true;
+                }   
+                else{
+                         addFieldError("ERRORAM", "Campo requerido");
+                    amaterno=false;
+                    
+                }   
+                    
+                   if(res.getAPATERNO().length()>0){
+                       res.setAPATERNO(res.getAPATERNO().toUpperCase());
+                    res.setAPATERNO(remove1(res.getAPATERNO())); 
+                    apaterno=true;
+                }   
+                else{
+                       addFieldError("ERRORAP", "Campo requerido");
+                    apaterno=false;
+                    
+                }      
+                    
+                  
+              if(nombre && amaterno && apaterno )    {
+                  
+            
+                  
+                ListaRegEncuestados=con.ConsultaRegEncNombre(res);
+                
+               if(ListaRegEncuestados.size()>0){
+                   
+                   bannombres=false;
+                   
+               }
+               else{
+                   
+                    addFieldError("ERRORNONOMBRE", "No se encontro información del participante");
+                   
+                   return "ERROR";
+                   
+               }
+                
+                
+                
+                
+                
+                  }
+            
+              }
            
             
-            ListaRegEncuestados=con.ConsultaRegEnc(res);
+           
             
             if(ListaRegEncuestados.size()>0){
                 

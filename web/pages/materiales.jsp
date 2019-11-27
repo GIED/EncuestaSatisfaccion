@@ -283,23 +283,82 @@ function ConsultaNomEvento(accion) {
                                                                             <div class="card-body">
                                                                                 <div class="form-group" style="margin-bottom: 20px;">
                                                                                    
-                                                                                    <div class="col-12">
-                                                                                        <s:textfield cssClass="form-control" name="res.FOLIO" id="FOLIO" placeholder="Ingrese su número de folio" oninput="validarInput(this); telquita6();" cssStyle="text-transform: uppercase;" maxLength="6"></s:textfield> 
-                                                                                    </div>
-                                                                                     
-                                                                                      <pre id="resultado" > </pre>
                                                                                     
+                                                                                     <div class="col-lg-12" style="margin-top: 20px; margin-bottom: 15px;">
+                                                                                      <label for="SECTOR">Ingresar por:</label>
+                                                                                                  <s:radio label="Genero" name="res.TIPO" list="#{'1':'Folio','2':'Nombre'}"   onclick= "Javascript:valorotros('elegirAccesoMateriales')" cssStyle="margin-left:15px;"  />   
+                                                                                                       <s:fielderror  fieldName="D4" cssClass="col-lg-12 alert alert-danger" id="quitamen4"></s:fielderror>
+
+                                                                                 </div>  
+                                                                                    
+                                                                                    
+                                                                                      <s:fielderror  fieldName="SEGUARDO" cssClass="col-lg-12 alert alert-success" cssStyle="margin-top:10px;"></s:fielderror>
+                                                                                    <s:fielderror  fieldName="ERRORPREG" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
+                                                                                    <s:fielderror  fieldName="ERRORFOLIO" cssClass="col-lg-12 alert alert-danger" id="quitamen6"></s:fielderror>
+                                                                                    <s:fielderror  fieldName="SI" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                    
+                                                                                 <s:if test="banfolio">
+                                                                                                           
                                                                                    
-                                                                             <s:fielderror  fieldName="ERRORPREG" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
-                                                                              <s:fielderror  fieldName="ERRORFOLIO" cssClass="col-lg-12 alert alert-danger" id="quitamen6"></s:fielderror>
-                                                                               <s:fielderror  fieldName="SI" cssClass="col-lg-12 alert alert-danger"></s:fielderror>
-                                                                             <br></br>
-                                                                             <div id="btnvalidar" style="display: none;">
-                                                                                    <div class="col-12 text-center">
-                                                                                        <a class="btn btn-round btn-rose"  href="Javascript:IniciaEvaluacion('MuestraMateriales')">Consultar Folio</a>
-                                                                                    </div>
-                                                                             </div>
-                                                                               <s:fielderror  fieldName="SEGUARDO" cssClass="col-lg-12 alert alert-success" cssStyle="margin-top:20px;"></s:fielderror>
+                                                                                                           <div class="col-12">
+                                                                                                           <s:textfield cssClass="form-control" name="res.FOLIO" id="FOLIO" placeholder="Ingrese su número de folio" oninput="validarInput(this); telquita6();"  maxLength="6"></s:textfield> 
+                                                                                                           </div>
+
+                                                                                                           <pre id="resultado" > </pre>
+
+
+                                                                                                       <br></br>
+                                                                                                           <div id="btnvalidar" style="display: none;">
+                                                                                                               <div class="col-12 text-center">
+                                                                                                                   <a class="btn btn-round btn-rose"  href="Javascript:IniciaEvaluacion('MuestraMateriales')">Consultar Folio</a>
+                                                                                                               </div>
+                                                                                                           </div>
+
+                                                                              </s:if> 
+                                                                                                           
+                                                                                                           
+                                                                            <s:if test="bannombres">
+                                                                                                           
+                                                                                   
+                                                                                                            <div class="col-12" style="margin-bottom: 10px;">
+                                                                                                           <s:textfield cssClass="form-control" name="res.NOMBRE" id="NOMBRE" placeholder="Nombre(s)" oninput="telquita10();"  ></s:textfield> 
+                                                                                                            <s:fielderror  fieldName="ERRORNOMBRE" cssClass="col-lg-12 alert alert-danger" id="quitamen10"></s:fielderror>
+                                                                                                            
+                                                                                                            
+                                                                                                            </div>
+                                                                                                            <div class="col-12" style="margin-bottom: 10px;">
+                                                                                                           <s:textfield cssClass="form-control" name="res.APATERNO" id="APATERNO" placeholder="Apellido Paterno" oninput="telquita11();" ></s:textfield> 
+                                                                                                           <s:fielderror  fieldName="ERRORAP" cssClass="col-lg-12 alert alert-danger" id="quitamen11"></s:fielderror>
+
+                                                                                                            
+                                                                                                            </div>
+                                                                                                             <div class="col-12" style="margin-bottom: 10px;">
+                                                                                                           <s:textfield cssClass="form-control" name="res.AMATERNO" id="AMATERNO" placeholder="Apellido Materno" oninput="telquita12();"  ></s:textfield> 
+                                                                                                             <s:fielderror  fieldName="ERRORAM" cssClass="col-lg-12 alert alert-danger" id="quitamen12"></s:fielderror>
+
+                                                                                                           </div>
+                                                                                                          
+
+
+                                                                                                      
+                                                                                                           <div id="btnvalidar">
+                                                                                                               <div class="col-12 text-center">
+                                                                                                                   <a class="btn btn-round btn-rose"  href="Javascript:IniciaEvaluacion('MuestraMateriales')">Consultar Folio</a>
+                                                                                                               </div>
+                                                                                                           </div>
+                                                                                                             
+                                                                                                          <s:fielderror  fieldName="ERRORNONOMBRE" cssClass="col-lg-12 alert alert-danger" id="quitamen12"></s:fielderror>
+ 
+                                                                                                             
+                                                                                                             
+                                                                                                             
+                                                                                                             
+
+                                                                              </s:if>    
                                                                              
                                                                              
                                                                              
